@@ -1,0 +1,2 @@
+C:\PROGRA~2\ARMGNU~1\13C7F1~1.2RE\bin\ARM-NO~2.EXE qc libfreertos_kernel_port.a CMakeFiles/freertos_kernel_port.dir/GCC/ARM_CM3/port.c.obj
+C:\PROGRA~2\ARMGNU~1\13C7F1~1.2RE\bin\AR17F9~1.EXE libfreertos_kernel_port.a

@@ -1,0 +1,203 @@
+* Usage
+This project implements a Command-Line Interface (CLI) allowing users to interact with the system directly to query and toggle system states, primarily the LED, and also provides a help command and an exit command.
+
+This project is written in C++ and operates in a REPL (Read-Evaluate-Print Loop) manner, allowing users to perform system interactions interactively.
+
+The interface supports the following major commands:
+
+~query~ to display the status of the LED.
+~toggle~ to toggle the state of the LED and displays the new status.
+~help~ to display the help screen showing all the available commands.
+~q~ to exit the CLI.
+
+All commands are case-sensitive. *Note* that running ~q~ on the microcontroller will simply reset it for now and you will still have to quit what ever you are using to connect to the board.
+
+[[file:../res/lab3.gif]]
+*Usage demo*
+
+
+** Interactivity
+In the interactive mode, users can type commands directly at the prompt. For example, to toggle the LED and display its new status, type the following at the prompt:
+
+#+begin_src Symbol’s function definition is void: +yas/org-last-src-lang
+toggle
+#+end_src
+
+To display the current status of the LED, type:
+
+#+begin_src Symbol’s function definition is void: +yas/org-last-src-lang
+query
+#+end_src
+
+*** Command Responses
+Responses to the commands are displayed on the screen. For instance, the response for the query command will look like this if the LED is on:
+
+#+begin_src Symbol’s function definition is void: +yas/org-last-src-lang
+LED is on
+#+end_src
+
+And like this if the LED is off:
+#+begin_src Symbol’s function definition is void: +yas/org-last-src-lang
+LED is off
+#+end_src
+
+*** Error Handling
+The CLI will output "Unknown command" for commands that do not match the available commands listed above.
+
+*** Exiting the CLI
+To exit the CLI, simply type:
+
+#+begin_src Symbol’s function definition is void: +yas/org-last-src-lang
+q
+#+end_src
+
+*** Help Command
+To view the list of available commands along with a short description for each, type:
+
+#+begin_src Symbol’s function definition is void: +yas/org-last-src-lang
+help
+#+end_src
+
+The response will look like this:
+
+#+begin_src Symbol’s function definition is void: +yas/org-last-src-lang
+Available Commands:
+  toggle - Toggles the state of the LED and displays the new status
+  query  - Displays the status of the LED
+  help   - Displays this help screen
+  q      - Exits the CLI
+#+end_src
+
+** Prerequisites
+*USART Communication Software*: A software tool or utility that allows you to interface with the microcontroller over USART, like a serial terminal program (e.g., PuTTY, Tera Term) is required to send commands and receive responses from the microcontroller.
+
+- [[https://github.com/pyserial/pyserial][pyserial]] is a nice alternative to PuTTy
+
+
+* Building
+
+The gif in [[Usage]] demonstrates this process using ~cmake~, ~make~, and ~st-flash~.
+
+** CMake
+We provide three ways of building this project, the first way is with [[https://cmake.org/download/][CMake]].
+
+Navigate to the project directory:
+
+#+begin_src shell
+cd /path/to/your/project
+#+end_src
+
+Run the ~cmake~ command with build flags:
+
+#+begin_src shell
+cmake -DPROJECT_NAME=firmware -DCMAKE_BUILD_TYPE=Debug -DDUMP_ASM=OFF
+#+end_src
+
+Build the project:
+
+#+begin_src shell
+make
+#+end_src
+
+After the build is complete, you should find the resulting ~.bin~, ~.elf~, and ~.s~ files (if ~DDUMP_ASM~ flag is enabled) in the build directory or any other directory specified in the ~CMakeLists.txt~ post-build commands.
+
+#+begin_src Symbol’s function definition is void: +yas/org-last-src-lang
+~/p/ense452/lab λ tree
+.
+├── CMakeFiles
+│  ├── 3.26.4
+│  │  ├── CompilerIdASM
+│  ├── firmware.dir
+│  │  ├── core
+│  │  │  ├── src
+...
+├── src
+│  ├── cli.cpp
+│  └── main.cpp
+├── cmake_install.cmake
+├── CMakeCache.txt
+├── CMakeLists.txt
+├── compile_commands.json
+├── cross.nix
+├── default.nix
+├── Doxyfile
+├── firmware.bin
+├── firmware.elf
+├── firmware.hex
+├── firmware.map
+├── gcc-arm-none-eabi.cmake
+└── README.org
+#+end_src
+
+*** Flashing
+To flash the firmware we need ~st-link~, which should probably already be installed by Keil.
+
+#+begin_src shell
+st-flash --reset write path/to/firmware.bin 0x08000000
+#+end_src
+
+To connect to the board(you can also just use putty):
+
+#+begin_src shell
+python -m serial.tools.miniterm /dev/ttyACM0 115200 -f direct
+#+end_src
+
+Replace ~/dev/ttyACM0~ with the appropriate path to the board for your machine.
+
+
+** Nix (Optional)
+/Not really recommended unless you already use Nix/
+
+[[https://nixos.org/guides/nix-pills/][Nix]] is the second way of building this project. If you aren't already familiar with it, it's a great tool for declaratively building reproducible packages across systems. This solves the 'it works on my machine' issues that Docker /tries/ to solve.
+
+To build the project:
+
+#+begin_src shell
+nix build -L .#packages.x86_64-linux.lab
+#+end_src
+
+This will compile the C++ code that is able to run on the host machine, not the embedded target.
+
+
+To build the embedded project:
+
+#+begin_src shell
+nix build -L .#packages.arm-none-eabi.default
+#+end_src
+
+This will also write binaries of shell applications to run commands to flash the board using ~st-link~, use ~openocd~ and ~gdb~ to debug the target, and ~pyserial~/~miniterm~ to use semi-hosting to connect to the target using ~USART2~.
+
+To flash the target:
+
+#+begin_src shell
+nix run .#flash-stlink
+#+end_src
+
+or:
+
+#+begin_src shell
+st-flash --reset write path/to/firmware.bin 0x08000000
+#+end_src
+
+To connect to the target:
+
+#+begin_src shell
+nix run .#pyserial
+#+end_src
+
+or:
+
+#+begin_src shell
+"python -m serial.tools.miniterm /dev/ttyACM0 115200 -f direct
+#+end_src
+
+The commands for ~openocd~ and ~gdb~ are currently broken, but:
+
+#+begin_src shell
+nix run .#ocd
+#+end_src
+
+#+begin_src shell
+nix run .#gdb
+#+end_src
+
