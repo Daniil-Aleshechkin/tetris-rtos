@@ -1,5 +1,5 @@
 #include "BOARD_STATE_H.h"
-#include "queue.h"
+#include "tetris_queue.h"
 
 #ifndef TETRIS_GAME_STATE
 #define TETRIS_GAME_STATE

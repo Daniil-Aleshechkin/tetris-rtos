@@ -1,0 +1,37 @@
+FreeRTOS/Source/CMakeFiles/freertos_kernel.dir/portable/MemMang/heap_2.c.obj: \
+ C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\portable\MemMang\heap_2.c \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/stdlib.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/machine/ieeefp.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/_ansi.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/newlib-nano/newlib.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/_newlib_version.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/config.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/features.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/lib/gcc/arm-none-eabi/13.2.1/include/stddef.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/reent.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/_ansi.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/cdefs.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/machine/_default_types.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/_types.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/machine/_types.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/lock.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/assert.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/machine/stdlib.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/alloca.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/string.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/_locale.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/strings.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/string.h \
+ C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\include/FreeRTOS.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/stdint.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/_intsup.h \
+ C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/_stdint.h \
+ C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS/FreeRTOSConfig.h \
+ C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\include/projdefs.h \
+ C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\include/portable.h \
+ C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\include/deprecated_definitions.h \
+ C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\portable\GCC\ARM_CM3/portmacro.h \
+ C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\include/mpu_wrappers.h \
+ C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\include/task.h \
+ C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\include/list.h

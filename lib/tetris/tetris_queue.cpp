@@ -1,4 +1,4 @@
-#include "queue.h"
+#include "tetris_queue.h"
 #include <stdlib.h>
 
 PieceType* generateBag() {

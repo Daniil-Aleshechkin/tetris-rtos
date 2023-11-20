@@ -1,7 +1,7 @@
 #include "TETRIS_GAME_STATE.h"
 #include <stdlib.h>
-#include "queue.h"
 #include "board.h"
+#include "tetris_queue.h"
 int8_t getStartingXPosFromPieceType(PieceType pieceType) {
     switch (pieceType)
     {

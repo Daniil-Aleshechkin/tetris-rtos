@@ -330,30 +330,6 @@ lib/tetris/piece.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\firmware.dir\build.make CMakeFiles/firmware.dir/lib/tetris/piece.cpp.s
 .PHONY : lib/tetris/piece.cpp.s
 
-lib/tetris/queue.obj: lib/tetris/queue.cpp.obj
-.PHONY : lib/tetris/queue.obj
-
-# target to build an object file
-lib/tetris/queue.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\firmware.dir\build.make CMakeFiles/firmware.dir/lib/tetris/queue.cpp.obj
-.PHONY : lib/tetris/queue.cpp.obj
-
-lib/tetris/queue.i: lib/tetris/queue.cpp.i
-.PHONY : lib/tetris/queue.i
-
-# target to preprocess a source file
-lib/tetris/queue.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\firmware.dir\build.make CMakeFiles/firmware.dir/lib/tetris/queue.cpp.i
-.PHONY : lib/tetris/queue.cpp.i
-
-lib/tetris/queue.s: lib/tetris/queue.cpp.s
-.PHONY : lib/tetris/queue.s
-
-# target to generate assembly for a file
-lib/tetris/queue.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\firmware.dir\build.make CMakeFiles/firmware.dir/lib/tetris/queue.cpp.s
-.PHONY : lib/tetris/queue.cpp.s
-
 lib/tetris/srs.obj: lib/tetris/srs.cpp.obj
 .PHONY : lib/tetris/srs.obj
 
@@ -377,6 +353,30 @@ lib/tetris/srs.s: lib/tetris/srs.cpp.s
 lib/tetris/srs.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\firmware.dir\build.make CMakeFiles/firmware.dir/lib/tetris/srs.cpp.s
 .PHONY : lib/tetris/srs.cpp.s
+
+lib/tetris/tetris_queue.obj: lib/tetris/tetris_queue.cpp.obj
+.PHONY : lib/tetris/tetris_queue.obj
+
+# target to build an object file
+lib/tetris/tetris_queue.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\firmware.dir\build.make CMakeFiles/firmware.dir/lib/tetris/tetris_queue.cpp.obj
+.PHONY : lib/tetris/tetris_queue.cpp.obj
+
+lib/tetris/tetris_queue.i: lib/tetris/tetris_queue.cpp.i
+.PHONY : lib/tetris/tetris_queue.i
+
+# target to preprocess a source file
+lib/tetris/tetris_queue.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\firmware.dir\build.make CMakeFiles/firmware.dir/lib/tetris/tetris_queue.cpp.i
+.PHONY : lib/tetris/tetris_queue.cpp.i
+
+lib/tetris/tetris_queue.s: lib/tetris/tetris_queue.cpp.s
+.PHONY : lib/tetris/tetris_queue.s
+
+# target to generate assembly for a file
+lib/tetris/tetris_queue.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\firmware.dir\build.make CMakeFiles/firmware.dir/lib/tetris/tetris_queue.cpp.s
+.PHONY : lib/tetris/tetris_queue.cpp.s
 
 lib/usart/usart_STM32.obj: lib/usart/usart_STM32.cpp.obj
 .PHONY : lib/usart/usart_STM32.obj
@@ -483,12 +483,12 @@ help:
 	@echo ... lib/tetris/piece.obj
 	@echo ... lib/tetris/piece.i
 	@echo ... lib/tetris/piece.s
-	@echo ... lib/tetris/queue.obj
-	@echo ... lib/tetris/queue.i
-	@echo ... lib/tetris/queue.s
 	@echo ... lib/tetris/srs.obj
 	@echo ... lib/tetris/srs.i
 	@echo ... lib/tetris/srs.s
+	@echo ... lib/tetris/tetris_queue.obj
+	@echo ... lib/tetris/tetris_queue.i
+	@echo ... lib/tetris/tetris_queue.s
 	@echo ... lib/usart/usart_STM32.obj
 	@echo ... lib/usart/usart_STM32.i
 	@echo ... lib/usart/usart_STM32.s

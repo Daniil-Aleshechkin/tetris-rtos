@@ -1,7 +1,7 @@
 #include "TETRIS_ENUMS.h"
 
-#ifndef QUEUE
-#define QUEUE
+#ifndef TETRIS_QUEUE
+#define TETRIS_QUEUE
 
 struct QueueElement {
     QueueElement* next;
