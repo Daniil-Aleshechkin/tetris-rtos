@@ -2,6 +2,11 @@
 #include "piece.h"
 #include "usart_STM32.h"
 #include "util_STM32.h"
+#include "FreeRTOS.h"
+#include "task.h"
+
+# define mainPRINT_TASK_PRIORITY (tskIDLE_PRIORITY + 1)
+# define mainINPUT_READ_PRIORITY (tskIDLE_PRIORITY + 2)
 
 TetrisGameState* state = nullptr;
 int readCharacter;
@@ -13,6 +18,21 @@ void printNum(int num);
 char getCharFromNum(int num);
 void autoRepeat();
 
+void vPrintTask(void* parameters);
+
+void vPrintTask(void* parameters) {
+	for(;;){
+    sendTetrisChars(printState(state));
+    vTaskDelay(30);
+	}
+}
+
+void vInputTask(void* parameters) {
+	for(;;){
+		handleInput(readData());
+	}
+}
+
 int main() {
   usartInit();
   clockInit();
@@ -21,17 +41,22 @@ int main() {
   prevLeft = false;
 
   sendTetrisChars(printState(state));
-  while (true) {
-    readCharacter = readData();
-    // if (readCharacter != 0) {
+  
+  xTaskCreate(vPrintTask, "Print", configMINIMAL_STACK_SIZE, NULL, mainPRINT_TASK_PRIORITY, NULL);
+  xTaskCreate(vInputTask, "Input", configMINIMAL_STACK_SIZE, NULL, mainINPUT_READ_PRIORITY, NULL);
+  vTaskStartScheduler();
+
+  // while (true) {
+  //   readCharacter = readData();
+  //   // if (readCharacter != 0) {
       
-    //   printNum(readCharacter);
-    //   sendData('\n');
-    // }
+  //   //   printNum(readCharacter);
+  //   //   sendData('\n');
+  //   // }
 
-    handleInput(readCharacter);
+  //   handleInput(readCharacter);
 
-  }
+  // }
   
 }
 
@@ -68,47 +93,59 @@ void handleInput(int input) {
   {
   case 0x64:
     state = hardDropPiece(state);
-    sendTetrisChars(printState(state));
+    //sendTetrisChars(printState(state));
     break;
   case 0x34:
     state = movePiece(state, true);
     prevLeft = true;
 
-    sendTetrisChars(printState(state));
+    //sendTetrisChars(printState(state));
     break;
   case 0x36:
     state = movePiece(state, false);
     prevLeft = false;
-    sendTetrisChars(printState(state));
+    //sendTetrisChars(printState(state));
     break;
   case 0x38:
     state = rotatePiece(state, DEG_90);
-    sendTetrisChars(printState(state));
+    //sendTetrisChars(printState(state));
     break;
   case 0x71:
     state = rotatePiece(state, DEG_180);
-    sendTetrisChars(printState(state));
+    //sendTetrisChars(printState(state));
     break;
   case 0x77:
     state = rotatePiece(state, DEG_270);
-    sendTetrisChars(printState(state));
+    //sendTetrisChars(printState(state));
     break;
   case 0x72:
     state = reset(state);
-    sendTetrisChars(printState(state));
+    //sendTetrisChars(printState(state));
     break;
   case 0x35:
     state = softDropPiece(state);
-    sendTetrisChars(printState(state));
+    //sendTetrisChars(printState(state));
     break;
   case 0x9:
     holdPiece(state->holdPiece, state->queue, state->piece);
-    sendTetrisChars(printState(state));
+    //sendTetrisChars(printState(state));
     break;
   case 0x20:
     autoRepeat();
-    sendTetrisChars(printState(state));
+    //sendTetrisChars(printState(state));
   default:
     break;
   }
+}
+
+void vApplicationStackOverflowHook(TaskHandle_t pxTask, char *pcTaskName) {
+  /* This function will get called if a task overflows its stack.   If the
+  parameters are corrupt then inspect pxCurrentTCB to find which was the
+  offending task. */
+
+  (void)pxTask;
+  (void)pcTaskName;
+
+  for (;;)
+    ;
 }

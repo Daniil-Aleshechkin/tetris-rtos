@@ -1,5 +1,5 @@
 FreeRTOS/Source/CMakeFiles/freertos_kernel.dir/portable/MemMang/heap_2.c.obj: \
- C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\portable\MemMang\heap_2.c \
+ C:\dev\class\tetris-rtos\FreeRTOS\Source\portable\MemMang\heap_2.c \
  C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/stdlib.h \
  C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/machine/ieeefp.h \
  C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/_ansi.h \
@@ -22,16 +22,16 @@ FreeRTOS/Source/CMakeFiles/freertos_kernel.dir/portable/MemMang/heap_2.c.obj: \
  C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/_locale.h \
  C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/strings.h \
  C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/string.h \
- C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\include/FreeRTOS.h \
+ C:\dev\class\tetris-rtos\FreeRTOS\Source\include/FreeRTOS.h \
  C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h \
  C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/stdint.h \
  C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/_intsup.h \
  C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/_stdint.h \
- C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS/FreeRTOSConfig.h \
- C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\include/projdefs.h \
- C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\include/portable.h \
- C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\include/deprecated_definitions.h \
- C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\portable\GCC\ARM_CM3/portmacro.h \
- C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\include/mpu_wrappers.h \
- C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\include/task.h \
- C:\Users\Daniil.Aleschechkin\Downloads\testfirm-new(1)\testfirm\FreeRTOS\Source\include/list.h
+ C:\dev\class\tetris-rtos\FreeRTOS/FreeRTOSConfig.h \
+ C:\dev\class\tetris-rtos\FreeRTOS\Source\include/projdefs.h \
+ C:\dev\class\tetris-rtos\FreeRTOS\Source\include/portable.h \
+ C:\dev\class\tetris-rtos\FreeRTOS\Source\include/deprecated_definitions.h \
+ C:\dev\class\tetris-rtos\FreeRTOS\Source\portable\GCC\ARM_CM3/portmacro.h \
+ C:\dev\class\tetris-rtos\FreeRTOS\Source\include/mpu_wrappers.h \
+ C:\dev\class\tetris-rtos\FreeRTOS\Source\include/task.h \
+ C:\dev\class\tetris-rtos\FreeRTOS\Source\include/list.h
