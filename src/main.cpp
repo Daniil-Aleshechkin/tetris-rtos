@@ -22,14 +22,16 @@ void vPrintTask(void* parameters);
 
 void vPrintTask(void* parameters) {
 	for(;;){
-    sendTetrisChars(printState(state));
-    vTaskDelay(30);
+
+    sendData(0x50);
+//    sendTetrisChars(printState(state));
+    //vTaskDelay(30);
 	}
 }
 
 void vInputTask(void* parameters) {
 	for(;;){
-		handleInput(readData());
+		//handleInput(readData());
 	}
 }
 
@@ -41,6 +43,7 @@ int main() {
   prevLeft = false;
 
   sendTetrisChars(printState(state));
+  sendData(0x55);
   
   xTaskCreate(vPrintTask, "Print", configMINIMAL_STACK_SIZE, NULL, mainPRINT_TASK_PRIORITY, NULL);
   xTaskCreate(vInputTask, "Input", configMINIMAL_STACK_SIZE, NULL, mainINPUT_READ_PRIORITY, NULL);
@@ -120,19 +123,19 @@ void handleInput(int input) {
     break;
   case 0x72:
     state = reset(state);
-    //sendTetrisChars(printState(state));
+  //  sendTetrisChars(printState(state));
     break;
   case 0x35:
     state = softDropPiece(state);
-    //sendTetrisChars(printState(state));
+    // sendTetrisChars(printState(state));
     break;
   case 0x9:
     holdPiece(state->holdPiece, state->queue, state->piece);
-    //sendTetrisChars(printState(state));
+//    sendTetrisChars(printState(state));
     break;
   case 0x20:
     autoRepeat();
-    //sendTetrisChars(printState(state));
+    sendTetrisChars(printState(state));
   default:
     break;
   }
@@ -146,6 +149,7 @@ void vApplicationStackOverflowHook(TaskHandle_t pxTask, char *pcTaskName) {
   (void)pxTask;
   (void)pcTaskName;
 
-  for (;;)
-    ;
+  for (;;) {
+    sendData(0x55);
+  }
 }
