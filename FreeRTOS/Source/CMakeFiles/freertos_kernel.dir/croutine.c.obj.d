@@ -1,20 +1,20 @@
 FreeRTOS/Source/CMakeFiles/freertos_kernel.dir/croutine.c.obj: \
- C:\dev\class\tetris-rtos\FreeRTOS\Source\croutine.c \
- C:\dev\class\tetris-rtos\FreeRTOS\Source\include/FreeRTOS.h \
- C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/lib/gcc/arm-none-eabi/13.2.1/include/stddef.h \
- C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h \
- C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/stdint.h \
- C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/machine/_default_types.h \
- C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/features.h \
- C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/_newlib_version.h \
- C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/_intsup.h \
- C:/PROGRA~2/ARMGNU~1/13C7F1~1.2RE/arm-none-eabi/include/sys/_stdint.h \
- C:\dev\class\tetris-rtos\FreeRTOS/FreeRTOSConfig.h \
- C:\dev\class\tetris-rtos\FreeRTOS\Source\include/projdefs.h \
- C:\dev\class\tetris-rtos\FreeRTOS\Source\include/portable.h \
- C:\dev\class\tetris-rtos\FreeRTOS\Source\include/deprecated_definitions.h \
- C:\dev\class\tetris-rtos\FreeRTOS\Source\portable\GCC\ARM_CM3/portmacro.h \
- C:\dev\class\tetris-rtos\FreeRTOS\Source\include/mpu_wrappers.h \
- C:\dev\class\tetris-rtos\FreeRTOS\Source\include/task.h \
- C:\dev\class\tetris-rtos\FreeRTOS\Source\include/list.h \
- C:\dev\class\tetris-rtos\FreeRTOS\Source\include/croutine.h
+ /home/daniil/tetris-rtos/FreeRTOS/Source/croutine.c \
+ /home/daniil/tetris-rtos/FreeRTOS/Source/include/FreeRTOS.h \
+ /usr/share/arm-none-eabi/lib/gcc/arm-none-eabi/13.2.1/include/stddef.h \
+ /usr/share/arm-none-eabi/lib/gcc/arm-none-eabi/13.2.1/include/stdint.h \
+ /usr/share/arm-none-eabi/arm-none-eabi/include/stdint.h \
+ /usr/share/arm-none-eabi/arm-none-eabi/include/machine/_default_types.h \
+ /usr/share/arm-none-eabi/arm-none-eabi/include/sys/features.h \
+ /usr/share/arm-none-eabi/arm-none-eabi/include/_newlib_version.h \
+ /usr/share/arm-none-eabi/arm-none-eabi/include/sys/_intsup.h \
+ /usr/share/arm-none-eabi/arm-none-eabi/include/sys/_stdint.h \
+ /home/daniil/tetris-rtos/FreeRTOS/FreeRTOSConfig.h \
+ /home/daniil/tetris-rtos/FreeRTOS/Source/include/projdefs.h \
+ /home/daniil/tetris-rtos/FreeRTOS/Source/include/portable.h \
+ /home/daniil/tetris-rtos/FreeRTOS/Source/include/deprecated_definitions.h \
+ /home/daniil/tetris-rtos/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h \
+ /home/daniil/tetris-rtos/FreeRTOS/Source/include/mpu_wrappers.h \
+ /home/daniil/tetris-rtos/FreeRTOS/Source/include/task.h \
+ /home/daniil/tetris-rtos/FreeRTOS/Source/include/list.h \
+ /home/daniil/tetris-rtos/FreeRTOS/Source/include/croutine.h
