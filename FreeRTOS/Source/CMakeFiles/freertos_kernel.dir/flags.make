@@ -6,5 +6,5 @@ C_DEFINES =
 
 C_INCLUDES = -I/home/daniil/tetris-rtos/FreeRTOS/Source/include -I/home/daniil/tetris-rtos/FreeRTOS -I/home/daniil/tetris-rtos/FreeRTOS/Source/portable/GCC/ARM_CM3
 
-C_FLAGS = -mcpu=cortex-m3 -mthumb -fdata-sections -ffunction-sections --specs=nano.specs -Wl,--gc-sections -g -std=gnu11
+C_FLAGS = -mcpu=cortex-m3 -mthumb -fdata-sections -ffunction-sections --specs=nano.specs -Wl,--gc-sections -g -g -std=gnu11
 

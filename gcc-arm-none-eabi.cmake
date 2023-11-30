@@ -3,7 +3,7 @@ set(CMAKE_SYSTEM_PROCESSOR arm)
 
 set(TOOLCHAIN_PREFIX arm-none-eabi-)
 set(CMAKE_C_FLAGS_INIT
-    "-mcpu=cortex-m3 -mthumb -fdata-sections -ffunction-sections --specs=nano.specs -Wl,--gc-sections")
+    "-mcpu=cortex-m3 -mthumb -fdata-sections -ffunction-sections --specs=nano.specs -Wl,--gc-sections -g")
 set(CMAKE_CXX_FLAGS_INIT
     "${CMAKE_C_FLAGS_INIT} -fno-rtti -fno-exceptions -fno-threadsafe-statics")
 

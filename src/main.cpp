@@ -5,8 +5,8 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
-# define mainPRINT_TASK_PRIORITY (tskIDLE_PRIORITY + 1)
-# define mainINPUT_READ_PRIORITY (tskIDLE_PRIORITY + 2)
+# define mainPRINT_TASK_PRIORITY (tskIDLE_PRIORITY + 2)
+# define mainINPUT_READ_PRIORITY (tskIDLE_PRIORITY + 1)
 
 TetrisGameState* state = nullptr;
 int readCharacter;
@@ -23,15 +23,17 @@ void vPrintTask(void* parameters);
 void vPrintTask(void* parameters) {
 	for(;;){
 
-    sendData(0x50);
-//    sendTetrisChars(printState(state));
-    //vTaskDelay(30);
+    //sendData(0x50);
+    sendTetrisChars(printState(state));
+    vTaskDelay(30);
 	}
 }
 
 void vInputTask(void* parameters) {
 	for(;;){
-		//handleInput(readData());
+    //sendData(0x55);
+		handleInput(readData());
+    //vTaskDelay(30);
 	}
 }
 
@@ -43,9 +45,9 @@ int main() {
   prevLeft = false;
 
   sendTetrisChars(printState(state));
-  sendData(0x55);
+  //sendData(0x55);
   
-  xTaskCreate(vPrintTask, "Print", configMINIMAL_STACK_SIZE, NULL, mainPRINT_TASK_PRIORITY, NULL);
+  xTaskCreate(vPrintTask, "Print", configMINIMAL_STACK_SIZE + 1000, NULL, mainPRINT_TASK_PRIORITY, NULL);
   xTaskCreate(vInputTask, "Input", configMINIMAL_STACK_SIZE, NULL, mainINPUT_READ_PRIORITY, NULL);
   vTaskStartScheduler();
 
@@ -60,7 +62,9 @@ int main() {
   //   handleInput(readCharacter);
 
   // }
-  
+  for (;;) {
+    sendData(0x55);
+  }
 }
 
 
