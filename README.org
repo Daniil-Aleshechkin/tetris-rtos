@@ -201,3 +201,8 @@ nix run .#ocd
 nix run .#gdb
 #+end_src
 
+arm-none-eabi-gdb -ex "target extended-remote localhost:3333" -ex "file ./firmware.elf" -ex load
+openocd -f ./openocd/ocd_stlv2_stm32f1.cfg
+cmake -DPROJECT_NAME=firmware -DCMAKE_BUILD_TYPE=Debug -DDUMP_ASM=OFF
+python3 -m serial.tools.miniterm /dev/ttyACM0 1500000 -f direct
+st-flash --reset write ./firmware.bin 0x08000000
