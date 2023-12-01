@@ -9,14 +9,20 @@
 # define mainINPUT_READ_PRIORITY (tskIDLE_PRIORITY + 1)
 
 TetrisGameState* state = nullptr;
+
 int readCharacter;
 int adcVal;
 bool prevLeft;
+int frames;
+
+const int DAS_TIME = 60000;
 
 void handleInput(int input);
 void printNum(int num);
 char getCharFromNum(int num);
 void autoRepeat();
+void handleDAS(int input, int currentFrame, int* dasState, int* dasFrame);
+void autoRepeatMove(bool isLeft);
 
 void vPrintTask(void* parameters);
 
@@ -29,12 +35,72 @@ void vPrintTask(void* parameters) {
 	}
 }
 
+const int NONE_DAS = 0;
+const int LEFT_DAS = 1;
+const int RIGH_TDAS = 2;
+
 void vInputTask(void* parameters) {
-	for(;;){
+  int dasState = NONE_DAS;
+  int dasFrame = -1;
+  int input;
+  int frame = 0;
+
+  for(;;){
     //sendData(0x55);
-		handleInput(readData());
-    //vTaskDelay(30);
+		input = readData();
+    
+    handleInput(input);
+    handleDAS(input, frame, &dasState, &dasFrame);
+    
+    frame++;
 	}
+}
+
+
+void handleDAS(int input, int currentFrame, int* dasState, int* dasFrame) {
+  bool isKeyUp = (input >> 7) & 0x1 == 1;
+
+  switch (input & 0x7F)
+  {
+  case 0x34: // Left
+    if (isKeyUp && *dasState == LEFT_DAS) {
+      *dasState = NONE_DAS;
+    } else if (!isKeyUp)
+    {
+      *dasFrame = currentFrame;
+      *dasState = LEFT_DAS;
+    }
+    
+    break;
+  case 0x36:
+    if (isKeyUp && *dasState == RIGH_TDAS) {
+      *dasState = NONE_DAS;
+    } else if (!isKeyUp)
+    {
+      *dasFrame = currentFrame;
+      *dasState = RIGH_TDAS;
+    }
+    break;
+  default:
+    break;
+  }
+
+  switch (*dasState)
+  {
+  case LEFT_DAS:
+    if (*dasFrame + DAS_TIME <= currentFrame) {
+      autoRepeatMove(true);
+    }
+    break;
+  case RIGH_TDAS:
+  
+    if (*dasFrame + DAS_TIME <= currentFrame) {
+      autoRepeatMove(false);
+    }
+    break;
+  default:
+    break;
+  }
 }
 
 int main() {
@@ -93,6 +159,20 @@ void autoRepeat() {
   movePiece(state, prevLeft);
   movePiece(state, prevLeft);
   movePiece(state, prevLeft);
+}
+
+
+void autoRepeatMove(bool isLeft) {
+  movePiece(state, isLeft);
+  movePiece(state, isLeft);
+  movePiece(state, isLeft);
+  movePiece(state, isLeft);
+  movePiece(state, isLeft);
+  movePiece(state, isLeft);
+  movePiece(state, isLeft);
+  movePiece(state, isLeft);
+  movePiece(state, isLeft);
+  movePiece(state, isLeft);
 }
 
 void handleInput(int input) {

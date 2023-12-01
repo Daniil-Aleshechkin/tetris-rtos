@@ -38,6 +38,13 @@ int readData(void) {
 }
 
 void sendTetrisChars(char** printedBoard) {
+	
+	sendData(0x1B);
+	sendData(0x5B);
+	sendData('2');
+	sendData('J');
+
+
 	for (int i = 0; i < 14; i++) {
 		for (int j = 0; j < 21 ; j++) {
 			sendData((int) printedBoard[i][j]);
@@ -49,11 +56,6 @@ void sendTetrisChars(char** printedBoard) {
 			sendData((int) printedBoard[i][j]);
 		}
 	}
-	sendData(0x1B);
-	sendData(0x5B);
-	sendData(0x33);
-	sendData(0x4A);
-
 
 	freePrintedBytes(printedBoard);
 }
