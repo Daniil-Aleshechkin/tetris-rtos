@@ -22,6 +22,7 @@ void printNum(int num);
 char getCharFromNum(int num);
 void autoRepeat();
 void handleDAS(int input, int currentFrame, int* dasState, int* dasFrame);
+void handleExtraSoftDrop(int input, bool* isSoftDropping);
 void autoRepeatMove(bool isLeft);
 
 void vPrintTask(void* parameters);
@@ -42,6 +43,8 @@ const int RIGH_TDAS = 2;
 void vInputTask(void* parameters) {
   int dasState = NONE_DAS;
   int dasFrame = -1;
+  bool isSoftDropping = false;
+
   int input;
   int frame = 0;
 
@@ -51,7 +54,8 @@ void vInputTask(void* parameters) {
     
     handleInput(input);
     handleDAS(input, frame, &dasState, &dasFrame);
-    
+    handleExtraSoftDrop(input, &isSoftDropping);
+
     frame++;
 	}
 }
@@ -100,6 +104,22 @@ void handleDAS(int input, int currentFrame, int* dasState, int* dasFrame) {
     break;
   default:
     break;
+  }
+}
+
+void handleExtraSoftDrop(int input, bool* isSoftDropping) {
+  bool isKeyUp = (input >> 7) & 0x1 == 1;
+
+  if ((input & 0x7F) == 0x35) {
+    if (isKeyUp) {
+      *isSoftDropping = false;
+    } else {
+      *isSoftDropping = true;
+    }
+  }
+
+  if (*isSoftDropping) {
+    state = softDropPiece(state);
   }
 }
 
