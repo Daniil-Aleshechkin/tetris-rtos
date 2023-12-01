@@ -1,6 +1,7 @@
 #include <stm32f103xb.h>
 #include "usart_STM32.h"
 #include "piece.h"
+#include "util_STM32.h"
 
 enum Colors {
 	RED,
@@ -29,7 +30,7 @@ void usartInit(void)
 
 
 	USART2->CR1 |= USART_CR1_UE;
-	USART2->BRR |= 0x18;
+	USART2->BRR |= 0x10;
 	USART2->CR1 |= USART_CR1_TE | USART_CR1_RE;
 	USART2->CR1 |= USART_CR1_UE;
 }
@@ -159,6 +160,15 @@ void sendTetrisChars(char** printedBoard) {
 	sendData('2');
 	sendData('J');
 
+	
+	sendData(0x1B);
+	sendData(0x5B);
+	sendData('H');
+
+
+
+	//delay(10000);
+
 	for (int i = 0; i < 14; i++) {
 		for (int j = 0; j < 21 ; j++) {
 			int previousColor = color;
@@ -197,10 +207,11 @@ void sendTetrisChars(char** printedBoard) {
 			} else {
 				sendData((int) printedBoard[i][j]);
 			}
-
 			
 		}
 	}
+
+	
 
 	freePrintedBytes(printedBoard);
 }

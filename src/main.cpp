@@ -15,7 +15,7 @@ int adcVal;
 bool prevLeft;
 int frames;
 
-const int DAS_TIME = 60000;
+const int DAS_TIME = 40000;
 
 void handleInput(int input);
 void printNum(int num);
@@ -109,6 +109,13 @@ int main() {
 
   state = getDefaultTetrisGameState();
   prevLeft = false;
+
+  sendData(0x1B);
+	sendData(0x5B);
+	sendData('?');
+	sendData('2');
+	sendData('5');
+	sendData('l');
 
   sendTetrisChars(printState(state));
   //sendData(0x55);
