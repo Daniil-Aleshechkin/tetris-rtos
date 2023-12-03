@@ -7,6 +7,7 @@
 #include "queue.h"
 #include "main.h"
 #include "cli.h"
+#include "semphr.h"
 
 # define mainPRINT_TASK_PRIORITY (tskIDLE_PRIORITY + 2)
 # define mainINPUT_READ_PRIORITY (tskIDLE_PRIORITY + 1)
@@ -14,6 +15,7 @@
 bool CLI_ENABLED = false;
 
 TetrisGameState* state = nullptr;
+SemaphoreHandle_t xState;
 
 QueueHandle_t xCLIQueue;
 
@@ -40,8 +42,11 @@ void vPrintTask(void* parameters) {
 	for(;;){
     if (!CLI_ENABLED) {
 
+      if (xSemaphoreTake(xState, portMAX_DELAY)) {
+        sendTetrisChars(printState(state));
+        xSemaphoreGive(xState);
+      }
 
-      sendTetrisChars(printState(state));
     }
 
     vTaskDelay(30);
@@ -71,12 +76,15 @@ void vInputTask(void* parameters) {
       continue;
     }
 
-    handleInput(input);
-    if (DAS_ENABLED) {
-      handleDAS(input, frame, &dasState, &dasFrame);    
-      handleExtraSoftDrop(input, &isSoftDropping);
+    if (xSemaphoreTake(xState, portMAX_DELAY)) {
+      handleInput(input);
+      if (DAS_ENABLED) {
+        handleDAS(input, frame, &dasState, &dasFrame);    
+        handleExtraSoftDrop(input, &isSoftDropping);
+      }
+
+      xSemaphoreGive(xState);
     }
-    
     frame++;
 	}
 }
@@ -160,6 +168,7 @@ int main() {
   prevLeft = false;
 
   xCLIQueue = xQueueCreate(1000, sizeof(char));
+  xState = xSemaphoreCreateMutex();
 
   sendData(0x1B);
 	sendData(0x5B);
