@@ -4,18 +4,27 @@
 #include "util_STM32.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "queue.h"
+#include "main.h"
+#include "cli.h"
 
 # define mainPRINT_TASK_PRIORITY (tskIDLE_PRIORITY + 2)
 # define mainINPUT_READ_PRIORITY (tskIDLE_PRIORITY + 1)
 
+bool CLI_ENABLED = true;
+
 TetrisGameState* state = nullptr;
+
+QueueHandle_t xCLIQueue;
 
 int readCharacter;
 int adcVal;
 bool prevLeft;
 int frames;
 
-const int DAS_TIME = 40000;
+int DAS_TIME = 40000;
+int ARR_TIME = 0;
+bool DAS_ENABLED = true;
 
 void handleInput(int input);
 void printNum(int num);
@@ -29,9 +38,10 @@ void vPrintTask(void* parameters);
 
 void vPrintTask(void* parameters) {
 	for(;;){
+    if (!CLI_ENABLED) {
+      sendTetrisChars(printState(state));
+    }
 
-    //sendData(0x50);
-    sendTetrisChars(printState(state));
     vTaskDelay(30);
 	}
 }
@@ -49,11 +59,20 @@ void vInputTask(void* parameters) {
   int frame = 0;
 
   for(;;){
-    //sendData(0x55);
 		input = readData();
     
+    if (CLI_ENABLED) {
+      if (input != 0x00) {
+        xQueueSend(xCLIQueue, &input, 0);
+      }
+      vTaskDelay(10);
+      continue;
+    }
+
     handleInput(input);
-    handleDAS(input, frame, &dasState, &dasFrame);
+    if (DAS_ENABLED) {
+      handleDAS(input, frame, &dasState, &dasFrame);
+    }
     handleExtraSoftDrop(input, &isSoftDropping);
 
     frame++;
@@ -130,18 +149,21 @@ int main() {
   state = getDefaultTetrisGameState();
   prevLeft = false;
 
+  xCLIQueue = xQueueCreate(1000, sizeof(char));
+
   sendData(0x1B);
 	sendData(0x5B);
 	sendData('?');
 	sendData('2');
 	sendData('5');
-	sendData('l');
+	sendData('h');
 
-  sendTetrisChars(printState(state));
+  //sendTetrisChars(printState(state));
   //sendData(0x55);
   
   xTaskCreate(vPrintTask, "Print", configMINIMAL_STACK_SIZE + 1000, NULL, mainPRINT_TASK_PRIORITY, NULL);
   xTaskCreate(vInputTask, "Input", configMINIMAL_STACK_SIZE, NULL, mainINPUT_READ_PRIORITY, NULL);
+  xTaskCreate(vCLITask, "CLI", configMINIMAL_STACK_SIZE + 1000, NULL, mainCLI_TASK_PRIORITY, NULL);
   vTaskStartScheduler();
 
   // while (true) {

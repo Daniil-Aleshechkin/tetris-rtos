@@ -6,5 +6,4 @@ void sendData(int);
 int readData(void);
 void sendTetrisChars(char** printedBoard);
 
-
 #endif

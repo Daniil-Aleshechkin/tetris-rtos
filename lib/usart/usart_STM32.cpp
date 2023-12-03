@@ -152,22 +152,16 @@ void sendColor(int color) {
 	}
 }
 
-
 void sendTetrisChars(char** printedBoard) {
 	int color = NONE;
 	sendData(0x1B);
 	sendData(0x5B);
 	sendData('2');
 	sendData('J');
-
 	
 	sendData(0x1B);
 	sendData(0x5B);
 	sendData('H');
-
-
-
-	//delay(10000);
 
 	for (int i = 0; i < 14; i++) {
 		for (int j = 0; j < 21 ; j++) {
@@ -177,7 +171,6 @@ void sendTetrisChars(char** printedBoard) {
 
 			if (previousColor != color) {
 				sendColor(color);
-				//sendColor(RED);
 			}
 
 			if (color != NONE) {
@@ -198,7 +191,6 @@ void sendTetrisChars(char** printedBoard) {
 
 			if (previousColor != color) {
 				sendColor(color);
-				//sendColor(RED);
 			}
 			
 			if (color != NONE) {

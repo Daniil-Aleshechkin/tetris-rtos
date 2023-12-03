@@ -1,0 +1,272 @@
+#include "cli.h"
+#include "stdio.h"
+#include "stdint.h"
+#include "util_STM32.h"
+#include "usart_STM32.h"
+#include "stdlib.h"
+#include "string.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+#include "main.h"
+#include <ctype.h>
+
+#define COMMAND_STRING_BUFFER_SIZE 30
+void CLI_Transmit(const uint8_t* pData, uint16_t size );
+
+enum Commands {
+	UNKNOWN,
+	DAS_ENABLE,
+	DAS_DISABLE,
+	ARR_SET,
+	DAS_SET,
+	HELP,
+	QUIT,
+};
+
+void CLI_Receive(uint8_t* pData, char nextCharacter, int* bufferIndex);
+
+void moveCursor(unsigned int);
+
+void moveCursor(unsigned int line) {
+	char ansiMoveCode[9];
+	snprintf(ansiMoveCode, sizeof(ansiMoveCode), "\x1b[%d;0H", line);
+	CLI_Transmit((const uint8_t *)ansiMoveCode, sizeof(ansiMoveCode));
+}
+
+static const char* SAVE_POS = "\x1b[s"; 
+static const char* LOAD_POS = "\x1b[u"; 
+static const char* CLEAR_7_LINES = "\x1b[7M";
+static const char* INSERT_7_LINES = "\x1b[7L";
+
+void printScreen(const uint8_t* pData) {
+	uint16_t size = 0;
+	while (pData[size] != 0x00) { size++; }
+	
+	sendData(0x0a);
+	CLI_Transmit(pData, size);
+}
+
+void printScreenOnLine(const uint8_t* pData) {
+	uint16_t size = 0;
+	while (pData[size] != 0x00) { size++; }
+	
+	CLI_Transmit(pData, size);
+}
+
+void CLI_Transmit(const uint8_t* pData, uint16_t size ) {
+	int i = 0;
+	for(i = 0; i < size; i++) {
+		sendData(pData[i]);
+	}
+}
+
+
+void CLI_Receive(uint8_t* pData, char nextCharacter, int* bufferIndex) {	
+	if (nextCharacter == 0x8) { /* Backspace handling */
+		if (*bufferIndex == 0) {
+			return;
+		}
+		
+		sendData(nextCharacter);
+		sendData(0x1B);
+		sendData(0x5B);
+		sendData('1');
+		sendData('X');
+
+		(*bufferIndex)--;
+		return;
+	}
+	
+	/* If the buffer is full. We need one extra char for null byte */
+	if (((*bufferIndex) + 1) == (COMMAND_STRING_BUFFER_SIZE - 1))  {
+		return;
+	}
+	
+	sendData(nextCharacter);
+	
+	pData[(*bufferIndex)] = nextCharacter;
+	(*bufferIndex)++;
+}
+
+const static char* SET_SCROLL_WINDOW = "\x1b[5;r";
+const static char* CLEAR = "\x1b[2J";
+const static char* CLEAR_LINE = "\x1b[2K";
+
+void clearScrean() {
+	/* Clear the terminal */
+	CLI_Transmit((const uint8_t*) CLEAR, sizeof(CLEAR));
+
+	sendData(0x1B);
+	sendData(0x5B);
+	sendData('?');
+	sendData('2');
+	sendData('5');
+	sendData('h');
+	
+	sendData(0x1B);
+	sendData(0x5B);
+	sendData('H');
+
+}
+#define DAS_ENABLE_STRING "dasenable"
+#define DAS_DISABLE_STRING "dasdisable"
+#define DAS_SET_STRING "das"
+#define ARR_SET_STIRNG "arr"
+#define HELP_STRING "help"
+#define QUIT_STRING "quit"
+
+enum Commands parseReturnCommand(char*);
+void toLowerCase(char*);
+
+void toLowerCase(char* str) {
+    int i = 0;
+    while (str[i] != 0x00) {
+        if (str[i] >= 'A' && str[i] <= 'Z') {
+            str[i] = str[i] + 32;
+        }
+        i++;
+    }
+}
+
+int parseCommandValue(char* commandInput) {
+    char* token;
+    char* endptr;
+    long value;
+
+    token = strtok(commandInput, " ");
+    if (token == NULL) {
+        return -1;
+    }
+
+	token = strtok(NULL, " ");
+    if (token == NULL) {
+        // No argument found after the space
+        return -1;
+    }
+
+    value = strtol(token, &endptr, 10);
+
+    if (endptr == token) {
+        // No digits were found
+        return -1;
+    }
+
+    return (int)value;
+}
+
+enum Commands parseReturnCommand(char* commandInput) {
+	size_t length;
+
+	char* space = strchr(commandInput, ' ');
+    if (space == NULL) {
+        length = strlen(commandInput);
+    } else {
+        length = space - commandInput;
+    }
+
+	if(strncmp(DAS_ENABLE_STRING, commandInput, length) == 0x00 && length == sizeof(DAS_ENABLE_STRING) - 1) {
+		return DAS_ENABLE;
+	} else if (strncmp(DAS_DISABLE_STRING, commandInput, length) == 0x00 && length == sizeof(DAS_DISABLE_STRING) - 1) {
+		return DAS_DISABLE;
+	} else if (strncmp(HELP_STRING, commandInput, length) == 0x00 && length == sizeof(HELP_STRING) - 1) {
+		return HELP;
+	} else if (strncmp(DAS_SET_STRING, commandInput, length) == 0x00 && length == sizeof(DAS_SET_STRING) - 1 ) {
+		return DAS_SET;
+	} else if (strncmp(ARR_SET_STIRNG, commandInput, length) == 0x00 && length == sizeof(ARR_SET_STIRNG) - 1) {
+		return ARR_SET;
+	} else if (strncmp(QUIT_STRING, commandInput, length) == 0x00 && length == sizeof(QUIT_STRING) - 1) {
+		return QUIT;
+	} else {
+		return UNKNOWN;
+	}
+}
+
+const char* ERROR_PARAM_STRING = "The parameter was not a number";
+const char* DAS_ENABLE_OUTPUT_STRING = "Das enabled";
+const char* DAS_DISABLE_OUTPUT_STRING = "Das disabled";
+const char* HELP_OUTPUT_STRING = "poop";
+
+const char* PROMPT = "tetris-rtos>";
+void processCommand(enum Commands command, int value) {
+	
+	char* valueStr = (char*)malloc(sizeof(char) * 20);
+	switch (command)
+	{
+	case DAS_ENABLE:
+		printScreen((const uint8_t*)DAS_ENABLE_OUTPUT_STRING);
+		DAS_ENABLED = true;
+		break;
+	case DAS_DISABLE:
+		printScreen((const uint8_t*)DAS_DISABLE_OUTPUT_STRING);
+		DAS_ENABLED = false;
+		break;
+	case DAS_SET:
+		if (value < 0) {
+			printScreen((const uint8_t*)ERROR_PARAM_STRING);
+			break;
+		}
+		snprintf(valueStr, 20, "Das set to %d", value);
+		printScreen((const uint8_t*)valueStr);
+		DAS_TIME = value;
+		break;
+	case ARR_SET:
+		if (value < 0) {
+			printScreen((const uint8_t*)ERROR_PARAM_STRING);
+			break;
+		}
+		snprintf(valueStr, 20, "Arr set to %d", value);
+		printScreen((const uint8_t*)valueStr);
+		ARR_TIME = value;
+		break;
+	case HELP:
+		printScreen((const uint8_t*)HELP_OUTPUT_STRING);
+		break;
+	case QUIT:
+		  sendData(0x1B);
+	sendData(0x5B);
+	sendData('?');
+	sendData('2');
+	sendData('5');
+	sendData('l');
+		free(valueStr);
+		CLI_ENABLED = false;
+		return;
+	default:
+		break;
+	}
+	free(valueStr);
+	sendData(0x0a);
+	delay(1000000);
+	printScreenOnLine((const uint8_t*)PROMPT);
+}
+
+
+void vCLITask(void* parameters) {
+	char recievedChar;
+	uint8_t* commandStringBuffer = (uint8_t*)malloc(sizeof(char) * COMMAND_STRING_BUFFER_SIZE);
+	int bufferIndex = 0;
+	enum Commands command;
+	int value;
+
+	clearScrean();
+	printScreenOnLine((const uint8_t*)PROMPT);
+	
+	for(;;){
+		if (xQueueReceive(xCLIQueue, &recievedChar, 0) == pdTRUE) {
+			if (recievedChar == 0x0D &&  bufferIndex != 0)  {
+				// Send command code here
+				
+				commandStringBuffer[bufferIndex] = 0x00;
+				toLowerCase((char *)commandStringBuffer);
+				command = parseReturnCommand((char *)commandStringBuffer);
+				value = parseCommandValue((char*)commandStringBuffer);
+				
+				processCommand(command, value);
+				bufferIndex = 0x00;
+			} else if (recievedChar != 0x0D && (isalpha(recievedChar) || isdigit(recievedChar) || recievedChar == 0x08 || recievedChar == 0x20)) {
+				CLI_Receive(commandStringBuffer, recievedChar, &bufferIndex);
+			}
+		}
+	}
+}

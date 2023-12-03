@@ -619,30 +619,6 @@ lib/tetris/tetris_queue.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/tetris/tetris_queue.cpp.s
 .PHONY : lib/tetris/tetris_queue.cpp.s
 
-lib/timer/timer.obj: lib/timer/timer.cpp.obj
-.PHONY : lib/timer/timer.obj
-
-# target to build an object file
-lib/timer/timer.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/timer/timer.cpp.obj
-.PHONY : lib/timer/timer.cpp.obj
-
-lib/timer/timer.i: lib/timer/timer.cpp.i
-.PHONY : lib/timer/timer.i
-
-# target to preprocess a source file
-lib/timer/timer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/timer/timer.cpp.i
-.PHONY : lib/timer/timer.cpp.i
-
-lib/timer/timer.s: lib/timer/timer.cpp.s
-.PHONY : lib/timer/timer.s
-
-# target to generate assembly for a file
-lib/timer/timer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/timer/timer.cpp.s
-.PHONY : lib/timer/timer.cpp.s
-
 lib/usart/usart_STM32.obj: lib/usart/usart_STM32.cpp.obj
 .PHONY : lib/usart/usart_STM32.obj
 
@@ -784,9 +760,6 @@ help:
 	@echo "... lib/tetris/tetris_queue.obj"
 	@echo "... lib/tetris/tetris_queue.i"
 	@echo "... lib/tetris/tetris_queue.s"
-	@echo "... lib/timer/timer.obj"
-	@echo "... lib/timer/timer.i"
-	@echo "... lib/timer/timer.s"
 	@echo "... lib/usart/usart_STM32.obj"
 	@echo "... lib/usart/usart_STM32.i"
 	@echo "... lib/usart/usart_STM32.s"
