@@ -61,6 +61,11 @@
 },
 {
   "directory": "/home/daniil/tetris-rtos",
+  "command": "/usr/share/arm-none-eabi/bin/arm-none-eabi-g++ -DSTM32F1xx -I/home/daniil/tetris-rtos/FreeRTOS/Source/portable/GCC/ARM_CM3 -isystem /home/daniil/tetris-rtos/core/inc -isystem /home/daniil/tetris-rtos/lib/tetris -isystem /home/daniil/tetris-rtos/lib/usart -isystem /home/daniil/tetris-rtos/lib/utils -isystem /home/daniil/tetris-rtos/FreeRTOS/Source/include -isystem /home/daniil/tetris-rtos/FreeRTOS -mcpu=cortex-m3 -mthumb -fdata-sections -ffunction-sections --specs=nano.specs -Wl,--gc-sections -g -fno-rtti -fno-exceptions -fno-threadsafe-statics -g -mcpu=cortex-m3 -mthumb -DSTM32F103xB -DF_CPU=72000000L -Wall -Wextra -Wpedantic -Wshadow -Wdouble-promotion -Wformat=2 -Wformat-truncation -Wundef -fno-common -Wno-unused-parameter -Wconversion -Wno-volatile -Wold-style-cast -Wuseless-cast -Wsuggest-override -Og -g3 -ggdb -std=gnu++20 -o CMakeFiles/firmware.dir/lib/cli/cli.cpp.obj -c /home/daniil/tetris-rtos/lib/cli/cli.cpp",
+  "file": "/home/daniil/tetris-rtos/lib/cli/cli.cpp"
+},
+{
+  "directory": "/home/daniil/tetris-rtos",
   "command": "/usr/share/arm-none-eabi/bin/arm-none-eabi-g++ -DSTM32F1xx -I/home/daniil/tetris-rtos/FreeRTOS/Source/portable/GCC/ARM_CM3 -isystem /home/daniil/tetris-rtos/core/inc -isystem /home/daniil/tetris-rtos/lib/tetris -isystem /home/daniil/tetris-rtos/lib/usart -isystem /home/daniil/tetris-rtos/lib/utils -isystem /home/daniil/tetris-rtos/FreeRTOS/Source/include -isystem /home/daniil/tetris-rtos/FreeRTOS -mcpu=cortex-m3 -mthumb -fdata-sections -ffunction-sections --specs=nano.specs -Wl,--gc-sections -g -fno-rtti -fno-exceptions -fno-threadsafe-statics -g -mcpu=cortex-m3 -mthumb -DSTM32F103xB -DF_CPU=72000000L -Wall -Wextra -Wpedantic -Wshadow -Wdouble-promotion -Wformat=2 -Wformat-truncation -Wundef -fno-common -Wno-unused-parameter -Wconversion -Wno-volatile -Wold-style-cast -Wuseless-cast -Wsuggest-override -Og -g3 -ggdb -std=gnu++20 -o CMakeFiles/firmware.dir/lib/tetris/TETRIS_GAME_STATE.cpp.obj -c /home/daniil/tetris-rtos/lib/tetris/TETRIS_GAME_STATE.cpp",
   "file": "/home/daniil/tetris-rtos/lib/tetris/TETRIS_GAME_STATE.cpp"
 },
@@ -93,6 +98,11 @@
   "directory": "/home/daniil/tetris-rtos",
   "command": "/usr/share/arm-none-eabi/bin/arm-none-eabi-g++ -DSTM32F1xx -I/home/daniil/tetris-rtos/FreeRTOS/Source/portable/GCC/ARM_CM3 -isystem /home/daniil/tetris-rtos/core/inc -isystem /home/daniil/tetris-rtos/lib/tetris -isystem /home/daniil/tetris-rtos/lib/usart -isystem /home/daniil/tetris-rtos/lib/utils -isystem /home/daniil/tetris-rtos/FreeRTOS/Source/include -isystem /home/daniil/tetris-rtos/FreeRTOS -mcpu=cortex-m3 -mthumb -fdata-sections -ffunction-sections --specs=nano.specs -Wl,--gc-sections -g -fno-rtti -fno-exceptions -fno-threadsafe-statics -g -mcpu=cortex-m3 -mthumb -DSTM32F103xB -DF_CPU=72000000L -Wall -Wextra -Wpedantic -Wshadow -Wdouble-promotion -Wformat=2 -Wformat-truncation -Wundef -fno-common -Wno-unused-parameter -Wconversion -Wno-volatile -Wold-style-cast -Wuseless-cast -Wsuggest-override -Og -g3 -ggdb -std=gnu++20 -o CMakeFiles/firmware.dir/lib/tetris/tetris_queue.cpp.obj -c /home/daniil/tetris-rtos/lib/tetris/tetris_queue.cpp",
   "file": "/home/daniil/tetris-rtos/lib/tetris/tetris_queue.cpp"
+},
+{
+  "directory": "/home/daniil/tetris-rtos",
+  "command": "/usr/share/arm-none-eabi/bin/arm-none-eabi-g++ -DSTM32F1xx -I/home/daniil/tetris-rtos/FreeRTOS/Source/portable/GCC/ARM_CM3 -isystem /home/daniil/tetris-rtos/core/inc -isystem /home/daniil/tetris-rtos/lib/tetris -isystem /home/daniil/tetris-rtos/lib/usart -isystem /home/daniil/tetris-rtos/lib/utils -isystem /home/daniil/tetris-rtos/FreeRTOS/Source/include -isystem /home/daniil/tetris-rtos/FreeRTOS -mcpu=cortex-m3 -mthumb -fdata-sections -ffunction-sections --specs=nano.specs -Wl,--gc-sections -g -fno-rtti -fno-exceptions -fno-threadsafe-statics -g -mcpu=cortex-m3 -mthumb -DSTM32F103xB -DF_CPU=72000000L -Wall -Wextra -Wpedantic -Wshadow -Wdouble-promotion -Wformat=2 -Wformat-truncation -Wundef -fno-common -Wno-unused-parameter -Wconversion -Wno-volatile -Wold-style-cast -Wuseless-cast -Wsuggest-override -Og -g3 -ggdb -std=gnu++20 -o CMakeFiles/firmware.dir/lib/timer/timer.cpp.obj -c /home/daniil/tetris-rtos/lib/timer/timer.cpp",
+  "file": "/home/daniil/tetris-rtos/lib/timer/timer.cpp"
 },
 {
   "directory": "/home/daniil/tetris-rtos",
