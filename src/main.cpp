@@ -11,7 +11,7 @@
 # define mainPRINT_TASK_PRIORITY (tskIDLE_PRIORITY + 2)
 # define mainINPUT_READ_PRIORITY (tskIDLE_PRIORITY + 1)
 
-bool CLI_ENABLED = true;
+bool CLI_ENABLED = false;
 
 TetrisGameState* state = nullptr;
 
@@ -39,6 +39,8 @@ void vPrintTask(void* parameters);
 void vPrintTask(void* parameters) {
 	for(;;){
     if (!CLI_ENABLED) {
+
+
       sendTetrisChars(printState(state));
     }
 
@@ -60,7 +62,7 @@ void vInputTask(void* parameters) {
 
   for(;;){
 		input = readData();
-    
+
     if (CLI_ENABLED) {
       if (input != 0x00) {
         xQueueSend(xCLIQueue, &input, 0);
@@ -164,7 +166,12 @@ int main() {
 	sendData('?');
 	sendData('2');
 	sendData('5');
-	sendData('h');
+	sendData('l');
+
+  sendData(0x1B);
+	sendData(0x5B);
+	sendData('!');
+	sendData('p');
 
   //sendTetrisChars(printState(state));
   //sendData(0x55);
@@ -277,6 +284,9 @@ void handleInput(int input) {
   case 0x20:
     autoRepeat();
     sendTetrisChars(printState(state));
+  case 0x1B:
+    clearScrean();
+    CLI_ENABLED = true;
   default:
     break;
   }

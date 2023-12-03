@@ -14,6 +14,8 @@
 #define COMMAND_STRING_BUFFER_SIZE 30
 void CLI_Transmit(const uint8_t* pData, uint16_t size );
 
+const char* PROMPT = "tetris-rtos>";
+
 enum Commands {
 	UNKNOWN,
 	DAS_ENABLE,
@@ -100,6 +102,13 @@ void clearScrean() {
 	sendData(0x1B);
 	sendData(0x5B);
 	sendData('?');
+	sendData('1');
+	sendData('2');
+	sendData('h');
+
+	sendData(0x1B);
+	sendData(0x5B);
+	sendData('?');
 	sendData('2');
 	sendData('5');
 	sendData('h');
@@ -107,6 +116,8 @@ void clearScrean() {
 	sendData(0x1B);
 	sendData(0x5B);
 	sendData('H');
+
+	printScreenOnLine((const uint8_t*)PROMPT);
 
 }
 #define DAS_ENABLE_STRING "dasenable"
@@ -187,7 +198,6 @@ const char* DAS_ENABLE_OUTPUT_STRING = "Das enabled";
 const char* DAS_DISABLE_OUTPUT_STRING = "Das disabled";
 const char* HELP_OUTPUT_STRING = "poop";
 
-const char* PROMPT = "tetris-rtos>";
 void processCommand(enum Commands command, int value) {
 	
 	char* valueStr = (char*)malloc(sizeof(char) * 20);
@@ -223,12 +233,12 @@ void processCommand(enum Commands command, int value) {
 		printScreen((const uint8_t*)HELP_OUTPUT_STRING);
 		break;
 	case QUIT:
-		  sendData(0x1B);
-	sendData(0x5B);
-	sendData('?');
-	sendData('2');
-	sendData('5');
-	sendData('l');
+		sendData(0x1B);
+		sendData(0x5B);
+		sendData('?');
+		sendData('2');
+		sendData('5');
+		sendData('l');
 		free(valueStr);
 		CLI_ENABLED = false;
 		return;
@@ -249,10 +259,9 @@ void vCLITask(void* parameters) {
 	enum Commands command;
 	int value;
 
-	clearScrean();
-	printScreenOnLine((const uint8_t*)PROMPT);
-	
 	for(;;){
+		//continue;
+
 		if (xQueueReceive(xCLIQueue, &recievedChar, 0) == pdTRUE) {
 			if (recievedChar == 0x0D &&  bufferIndex != 0)  {
 				// Send command code here
