@@ -73,10 +73,10 @@ void vInputTask(void* parameters) {
 
     handleInput(input);
     if (DAS_ENABLED) {
-      handleDAS(input, frame, &dasState, &dasFrame);
+      handleDAS(input, frame, &dasState, &dasFrame);    
+      handleExtraSoftDrop(input, &isSoftDropping);
     }
-    handleExtraSoftDrop(input, &isSoftDropping);
-
+    
     frame++;
 	}
 }
@@ -169,9 +169,19 @@ int main() {
 	sendData('l');
 
   sendData(0x1B);
-	sendData(0x5B);
-	sendData('!');
-	sendData('p');
+  sendData(0x5B);
+  sendData('?');
+  sendData('2');
+  sendData('5');
+  sendData('l');
+  
+  sendData(0x1B);
+  sendData(0x5B);
+  sendData('?');
+  sendData('1');
+  sendData('2');
+  sendData('l');
+
 
   //sendTetrisChars(printState(state));
   //sendData(0x55);
@@ -284,7 +294,8 @@ void handleInput(int input) {
   case 0x20:
     autoRepeat();
     sendTetrisChars(printState(state));
-  case 0x1B:
+    break;
+  case 0x70:
     clearScrean();
     CLI_ENABLED = true;
   default:

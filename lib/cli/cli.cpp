@@ -14,7 +14,8 @@
 #define COMMAND_STRING_BUFFER_SIZE 30
 void CLI_Transmit(const uint8_t* pData, uint16_t size );
 
-const char* PROMPT = "tetris-rtos>";
+const char* PROMPT = "tetris-rtos> ";
+const char* STARTING_PROMPT = "Tetris CLI: Type \"Help\" for a list of commands";
 
 enum Commands {
 	UNKNOWN,
@@ -105,19 +106,12 @@ void clearScrean() {
 	sendData('1');
 	sendData('2');
 	sendData('h');
-
-	sendData(0x1B);
-	sendData(0x5B);
-	sendData('?');
-	sendData('2');
-	sendData('5');
-	sendData('h');
 	
 	sendData(0x1B);
 	sendData(0x5B);
 	sendData('H');
-
-	printScreenOnLine((const uint8_t*)PROMPT);
+	printScreen((const uint8_t*) STARTING_PROMPT);
+	printScreen((const uint8_t*)PROMPT);
 
 }
 #define DAS_ENABLE_STRING "dasenable"
@@ -196,7 +190,13 @@ enum Commands parseReturnCommand(char* commandInput) {
 const char* ERROR_PARAM_STRING = "The parameter was not a number";
 const char* DAS_ENABLE_OUTPUT_STRING = "Das enabled";
 const char* DAS_DISABLE_OUTPUT_STRING = "Das disabled";
-const char* HELP_OUTPUT_STRING = "poop";
+const char* HELP_OUTPUT_STRING = "Commands: \n\
+Dasenable: Enable Delayed Auto Repeat \n\
+Dasdisable: Disable Delayed Auto Repeat \n\
+Help: Prints command list \n\
+Quit: Return to the game \n\
+DAS N: Set the das delay time to N (default is 40000) \n\
+ARR N: Set the arr delay time to N. Zero to disable (default is 0)";
 
 void processCommand(enum Commands command, int value) {
 	
@@ -239,6 +239,14 @@ void processCommand(enum Commands command, int value) {
 		sendData('2');
 		sendData('5');
 		sendData('l');
+		
+		sendData(0x1B);
+		sendData(0x5B);
+		sendData('?');
+		sendData('1');
+		sendData('2');
+		sendData('l');
+
 		free(valueStr);
 		CLI_ENABLED = false;
 		return;
