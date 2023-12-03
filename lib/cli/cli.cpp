@@ -198,6 +198,8 @@ Quit: Return to the game \n\
 DAS N: Set the das delay time to N (default is 40000) \n\
 ARR N: Set the arr delay time to N. Zero to disable (default is 0)";
 
+const char* UNKNOWN_OUTPUT_STRING = "Unknown command";
+
 void processCommand(enum Commands command, int value) {
 	
 	char* valueStr = (char*)malloc(sizeof(char) * 20);
@@ -251,6 +253,7 @@ void processCommand(enum Commands command, int value) {
 		CLI_ENABLED = false;
 		return;
 	default:
+		printScreen((const uint8_t*) UNKNOWN_OUTPUT_STRING);
 		break;
 	}
 	free(valueStr);
