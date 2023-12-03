@@ -112,13 +112,21 @@ void handleDAS(int input, int currentFrame, int* dasState, int* dasFrame) {
   {
   case LEFT_DAS:
     if (*dasFrame + DAS_TIME <= currentFrame) {
-      autoRepeatMove(true);
+      if (ARR_TIME == 0) {
+        autoRepeatMove(true);
+      } else if ((*dasFrame + DAS_TIME - currentFrame) % ARR_TIME == 0) {
+        movePiece(state, true);
+      }
     }
     break;
   case RIGH_TDAS:
   
     if (*dasFrame + DAS_TIME <= currentFrame) {
-      autoRepeatMove(false);
+       if (ARR_TIME == 0) {
+        autoRepeatMove(false);
+      } else if ((*dasFrame + DAS_TIME - currentFrame) % ARR_TIME == 0) {
+        movePiece(state, false);
+      }
     }
     break;
   default:
