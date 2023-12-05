@@ -3,8 +3,8 @@ import sys
 import tkinter as tk
 import serial
 
-port = "/dev/ttyACM0"
-baudrate = 1000000
+port = sys.argv[1]
+baudrate = 1500000
 ser = serial.Serial(port, baudrate, timeout=1)
 
 MOVE_LEFT_CODE = b'\x34'
@@ -16,40 +16,33 @@ SOFT_DROP_CODE = b'\x35'
 HARD_DROP_CODE = b'\x64'
 HOLD_CODE = b'\x09'
 RESET_CODE = b'\x72'
-
+QUIT_CODE = b'\x70'
 
 def get_key_byte(event: tk.Event):
-    if event.keycode == 113: # ARROW LEFT
+    if event.keysym == "Left": # ARROW LEFT
         return MOVE_LEFT_CODE
-    elif event.keycode == 114: # ARROW RIGHT
+    elif event.keysym == "Right": # ARROW RIGHT
         return MOVE_RIGHT_CODE
-    elif event.keycode == 111:
+    elif event.keysym == "Up":
         return ROTATE_90_CODE
-    elif event.keycode == 40:
+    elif event.keysym == "d":
         return HARD_DROP_CODE
-    elif event.keycode == 27:
+    elif event.keysym == "r":
         return RESET_CODE
-    elif event.keycode == 25:
+    elif event.keysym == "w":
         return ROTATE_270_CODE
-    elif event.keycode == 24:
+    elif event.keysym == "q":
         return ROTATE_180_CODE
-    elif event.keycode == 23:
+    elif event.keysym == "Tab":
         return HOLD_CODE
-    elif event.keycode == 116:
+    elif event.keysym == "Down":
         return SOFT_DROP_CODE
+    elif event.keysym == "p":
+        return QUIT_CODE
     return 0x00
 
 def on_key_press(event: tk.Event):
-   # print(f"WRITING {hex(get_key_byte(event))}")
     key = get_key_byte(event)
-    # if event.keycode == 116:
-    #     key = MOVE_LEFT_CODE
-    #     code = int.from_bytes(key, 'little')
-    #     code += 128
-
-    #     ser.write(code.to_bytes(1, 'little'))
-    # elif event.keycode == 113:
-    #     ser.write(key)
     ser.write(key)
     
 def on_key_released(event):
