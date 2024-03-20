@@ -55,6 +55,7 @@ target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/usart
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/utils
     ${CMAKE_CURRENT_SOURCE_DIR}/lib/cli
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/ws2821
     ${FREERTOS_DIR}/Source/include
     ${FREERTOS_DIR}
 )

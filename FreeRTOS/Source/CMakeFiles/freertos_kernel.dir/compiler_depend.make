@@ -90,7 +90,7 @@ FreeRTOS/Source/CMakeFiles/freertos_kernel.dir/list.c.obj: FreeRTOS/Source/list.
   FreeRTOS/Source/include/mpu_wrappers.h \
   FreeRTOS/Source/include/list.h
 
-FreeRTOS/Source/CMakeFiles/freertos_kernel.dir/portable/MemMang/heap_4.c.obj: FreeRTOS/Source/portable/MemMang/heap_4.c \
+FreeRTOS/Source/CMakeFiles/freertos_kernel.dir/portable/MemMang/heap_2.c.obj: FreeRTOS/Source/portable/MemMang/heap_2.c \
   /usr/share/arm-none-eabi/arm-none-eabi/include/stdlib.h \
   /usr/share/arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h \
   /usr/share/arm-none-eabi/arm-none-eabi/include/_ansi.h \
@@ -292,8 +292,6 @@ FreeRTOS/Source/queue.c:
 
 /usr/share/arm-none-eabi/arm-none-eabi/include/strings.h:
 
-FreeRTOS/Source/portable/MemMang/heap_4.c:
-
 FreeRTOS/Source/include/event_groups.h:
 
 FreeRTOS/Source/include/timers.h:
@@ -369,6 +367,8 @@ FreeRTOS/Source/include/task.h:
 /usr/share/arm-none-eabi/arm-none-eabi/include/sys/reent.h:
 
 /usr/share/arm-none-eabi/arm-none-eabi/include/newlib-nano/newlib.h:
+
+FreeRTOS/Source/portable/MemMang/heap_2.c:
 
 FreeRTOS/Source/croutine.c:
 

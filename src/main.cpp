@@ -8,9 +8,16 @@
 #include "main.h"
 #include "cli.h"
 #include "semphr.h"
+#include "ws2821_display.h"
+#include <stm32f103xb.h>
 
 # define mainPRINT_TASK_PRIORITY (tskIDLE_PRIORITY + 2)
 # define mainINPUT_READ_PRIORITY (tskIDLE_PRIORITY + 1)
+
+static struct pixel red = {0, 255, 0};
+static struct pixel blue = {0, 0, 255};
+static struct pixel green = {255, 0, 0};
+static struct pixel nothing = {0, 0, 0};
 
 bool CLI_ENABLED = false;
 
@@ -39,11 +46,37 @@ void autoRepeatMove(bool isLeft);
 void vPrintTask(void* parameters);
 
 void vPrintTask(void* parameters) {
-	for(;;){
+	static int offset = 0;
+  
+  for(;;){
     if (!CLI_ENABLED) {
 
       if (xSemaphoreTake(xState, portMAX_DELAY)) {
-        sendTetrisChars(printState(state));
+          __disable_irq();
+          refreshDisplay();
+          __enable_irq();
+          
+          bufferPixel(blue, 1, 2 + offset);
+          bufferPixel(blue, 2, 1+ offset);
+          bufferPixel(blue, 3, 1+ offset);
+          bufferPixel(blue, 4, 1+ offset);
+          bufferPixel(blue, 5, 1+ offset);
+          bufferPixel(blue, 6, 2+ offset);
+          
+          bufferPixel(nothing, 1, 2 + (1- offset));
+          bufferPixel(nothing, 2, 1 + (1- offset));
+          bufferPixel(nothing, 3, 1 + (1- offset));
+          bufferPixel(nothing, 4, 1 + (1- offset));
+          bufferPixel(nothing, 5, 1 + (1- offset));
+          bufferPixel(nothing, 6, 2 + (1- offset));
+          
+          if (offset == 0) {
+            offset = 1;
+          } else {
+            offset = 0;
+          }
+        
+        //sendTetrisChars(printState(state));
         xSemaphoreGive(xState);
       }
 
@@ -162,8 +195,22 @@ void handleExtraSoftDrop(int input, bool* isSoftDropping) {
 
 int main() {
   usartInit();
+  displayInit();
   clockInit();
 
+  bufferPixel(red, 2, 6);
+	bufferPixel(green, 2, 5);
+	bufferPixel(green, 2, 4);
+	bufferPixel(red, 5, 6);
+	bufferPixel(green, 5, 5);
+	bufferPixel(green, 5, 4);
+	
+	bufferPixel(blue, 1, 2);
+	bufferPixel(blue, 2, 1);
+	bufferPixel(blue, 3, 1);
+	bufferPixel(blue, 4, 1);
+	bufferPixel(blue, 5, 1);
+	bufferPixel(blue, 6, 2);
   state = getDefaultTetrisGameState();
   prevLeft = false;
 
@@ -192,8 +239,8 @@ int main() {
   sendData('l');
 
 
-  //sendTetrisChars(printState(state));
-  //sendData(0x55);
+  sendTetrisChars(printState(state));
+  sendData(0x55);
   
   xTaskCreate(vPrintTask, "Print", configMINIMAL_STACK_SIZE + 1000, NULL, mainPRINT_TASK_PRIORITY, NULL);
   xTaskCreate(vInputTask, "Input", configMINIMAL_STACK_SIZE, NULL, mainINPUT_READ_PRIORITY, NULL);
