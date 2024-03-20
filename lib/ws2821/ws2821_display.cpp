@@ -24,6 +24,12 @@ void displayInit() {
 	}
 }
 
+void clearBuffer() {
+	for (int i = 0; i < DISPLAY_FRAME_BUFFER_LENGTH*3; i++) {
+		display_frame_buffer[i] = ~(uint8_t)0;
+	}
+}
+
 void bufferPixel(struct pixel p, int x, int y) {
 	int yshift;
 

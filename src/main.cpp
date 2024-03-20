@@ -56,28 +56,9 @@ void vPrintTask(void* parameters) {
           refreshDisplay();
           __enable_irq();
           
-          bufferPixel(blue, 1, 2 + offset);
-          bufferPixel(blue, 2, 1+ offset);
-          bufferPixel(blue, 3, 1+ offset);
-          bufferPixel(blue, 4, 1+ offset);
-          bufferPixel(blue, 5, 1+ offset);
-          bufferPixel(blue, 6, 2+ offset);
-          
-          bufferPixel(nothing, 1, 2 + (1- offset));
-          bufferPixel(nothing, 2, 1 + (1- offset));
-          bufferPixel(nothing, 3, 1 + (1- offset));
-          bufferPixel(nothing, 4, 1 + (1- offset));
-          bufferPixel(nothing, 5, 1 + (1- offset));
-          bufferPixel(nothing, 6, 2 + (1- offset));
-          
-          if (offset == 0) {
-            offset = 1;
-          } else {
-            offset = 0;
-          }
-        
-        //sendTetrisChars(printState(state));
-        xSemaphoreGive(xState);
+          displayState(state);
+          sendTetrisChars(printState(state));
+          xSemaphoreGive(xState);
       }
 
     }

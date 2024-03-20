@@ -21,5 +21,5 @@ TetrisGameState* reset(TetrisGameState* state);
 char** printState(TetrisGameState* state);
 void freePrintedBytes(char** printedState);
 char getCharFromPieceType(PieceType pieceType);
-
+void displayState(TetrisGameState* state);
 #endif
