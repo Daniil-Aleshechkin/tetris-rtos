@@ -9,6 +9,7 @@
 #include "task.h"
 #include "queue.h"
 #include "main.h"
+#include "version.h"
 #include <ctype.h>
 
 #define COMMAND_STRING_BUFFER_SIZE 30
@@ -25,6 +26,7 @@ enum Commands {
 	DAS_SET,
 	HELP,
 	QUIT,
+	VERSION,
 };
 
 void CLI_Receive(uint8_t* pData, char nextCharacter, int* bufferIndex);
@@ -120,6 +122,7 @@ void clearScrean() {
 #define ARR_SET_STIRNG "arr"
 #define HELP_STRING "help"
 #define QUIT_STRING "quit"
+#define VERSION_STRING "version"
 
 enum Commands parseReturnCommand(char*);
 void toLowerCase(char*);
@@ -182,7 +185,9 @@ enum Commands parseReturnCommand(char* commandInput) {
 		return ARR_SET;
 	} else if (strncmp(QUIT_STRING, commandInput, length) == 0x00 && length == sizeof(QUIT_STRING) - 1) {
 		return QUIT;
-	} else {
+	} else if (strncmp(VERSION_STRING, commandInput, length) == 0x00 && length == sizeof(VERSION_STRING) - 1) {
+		return VERSION;	
+	}else {
 		return UNKNOWN;
 	}
 }
@@ -197,6 +202,7 @@ Help: Prints command list \n\
 Quit: Return to the game \n\
 DAS N: Set the das delay time to N (default is 40000) \n\
 ARR N: Set the arr delay time to N. Zero to disable (default is 0)";
+const char* VERSION_OUTPUT_STRING = VERSION_MESSAGE;
 
 const char* UNKNOWN_OUTPUT_STRING = "Unknown command";
 
@@ -252,6 +258,9 @@ void processCommand(enum Commands command, int value) {
 		free(valueStr);
 		CLI_ENABLED = false;
 		return;
+	case VERSION:
+		printScreen((const uint8_t*) VERSION_OUTPUT_STRING);
+		break;
 	default:
 		printScreen((const uint8_t*) UNKNOWN_OUTPUT_STRING);
 		break;
