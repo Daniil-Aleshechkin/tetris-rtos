@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 #ifndef MAIN
 #define MAIN 
 
