@@ -301,17 +301,7 @@ void displayState(TetrisGameState* state) {
             bufferPixel(getPieceColor(state->board[BOARD_HEIGHT - y - 1][x]), x - 1, y);
         }
     }
-
     Position* curPiecePositions = getTetrominoByPieceTypeAndRotation(state->piece->type, state->piece->rotation);
-    // piece
-    for (int i = 0; i < 4; i++) {
-        // check if we should even display it
-        int xPos = curPiecePositions[i].xpos + state->piece->location.xpos - 1;
-        int yPos = BOARD_HEIGHT - 1 - (curPiecePositions[i].ypos + state->piece->location.ypos);
-        if (xPos >= 2 && xPos < 6 && yPos < 8 && yPos >= 0) {
-            bufferPixel(getPieceColor(state->piece->type), xPos, yPos);
-        }
-    }
 
     // ghost piece
     Position ghostPiecePos;
@@ -325,6 +315,16 @@ void displayState(TetrisGameState* state) {
         int yPos = BOARD_HEIGHT - 1 - (curPiecePositions[i].ypos + ghostPiecePos.ypos);
         if (xPos >= 2 && xPos < 6 && yPos < 8 && yPos >= 0) {
             bufferPixel(SHADOW_COLOR, xPos, yPos);
+        }
+    }
+    
+    // piece
+    for (int i = 0; i < 4; i++) {
+        // check if we should even display it
+        int xPos = curPiecePositions[i].xpos + state->piece->location.xpos - 1;
+        int yPos = BOARD_HEIGHT - 1 - (curPiecePositions[i].ypos + state->piece->location.ypos);
+        if (xPos >= 2 && xPos < 6 && yPos < 8 && yPos >= 0) {
+            bufferPixel(getPieceColor(state->piece->type), xPos, yPos);
         }
     }
 }
