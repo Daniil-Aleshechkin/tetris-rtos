@@ -451,6 +451,78 @@ lib/cli/cli.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/cli/cli.cpp.s
 .PHONY : lib/cli/cli.cpp.s
 
+lib/com-14646/com_14646_matrix.obj: lib/com-14646/com_14646_matrix.cpp.obj
+.PHONY : lib/com-14646/com_14646_matrix.obj
+
+# target to build an object file
+lib/com-14646/com_14646_matrix.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/com-14646/com_14646_matrix.cpp.obj
+.PHONY : lib/com-14646/com_14646_matrix.cpp.obj
+
+lib/com-14646/com_14646_matrix.i: lib/com-14646/com_14646_matrix.cpp.i
+.PHONY : lib/com-14646/com_14646_matrix.i
+
+# target to preprocess a source file
+lib/com-14646/com_14646_matrix.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/com-14646/com_14646_matrix.cpp.i
+.PHONY : lib/com-14646/com_14646_matrix.cpp.i
+
+lib/com-14646/com_14646_matrix.s: lib/com-14646/com_14646_matrix.cpp.s
+.PHONY : lib/com-14646/com_14646_matrix.s
+
+# target to generate assembly for a file
+lib/com-14646/com_14646_matrix.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/com-14646/com_14646_matrix.cpp.s
+.PHONY : lib/com-14646/com_14646_matrix.cpp.s
+
+lib/com-14646/gpio.obj: lib/com-14646/gpio.cpp.obj
+.PHONY : lib/com-14646/gpio.obj
+
+# target to build an object file
+lib/com-14646/gpio.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/com-14646/gpio.cpp.obj
+.PHONY : lib/com-14646/gpio.cpp.obj
+
+lib/com-14646/gpio.i: lib/com-14646/gpio.cpp.i
+.PHONY : lib/com-14646/gpio.i
+
+# target to preprocess a source file
+lib/com-14646/gpio.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/com-14646/gpio.cpp.i
+.PHONY : lib/com-14646/gpio.cpp.i
+
+lib/com-14646/gpio.s: lib/com-14646/gpio.cpp.s
+.PHONY : lib/com-14646/gpio.s
+
+# target to generate assembly for a file
+lib/com-14646/gpio.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/com-14646/gpio.cpp.s
+.PHONY : lib/com-14646/gpio.cpp.s
+
+lib/com-14646/tim2.obj: lib/com-14646/tim2.cpp.obj
+.PHONY : lib/com-14646/tim2.obj
+
+# target to build an object file
+lib/com-14646/tim2.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/com-14646/tim2.cpp.obj
+.PHONY : lib/com-14646/tim2.cpp.obj
+
+lib/com-14646/tim2.i: lib/com-14646/tim2.cpp.i
+.PHONY : lib/com-14646/tim2.i
+
+# target to preprocess a source file
+lib/com-14646/tim2.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/com-14646/tim2.cpp.i
+.PHONY : lib/com-14646/tim2.cpp.i
+
+lib/com-14646/tim2.s: lib/com-14646/tim2.cpp.s
+.PHONY : lib/com-14646/tim2.s
+
+# target to generate assembly for a file
+lib/com-14646/tim2.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/com-14646/tim2.cpp.s
+.PHONY : lib/com-14646/tim2.cpp.s
+
 lib/tetris/TETRIS_GAME_STATE.obj: lib/tetris/TETRIS_GAME_STATE.cpp.obj
 .PHONY : lib/tetris/TETRIS_GAME_STATE.obj
 
@@ -667,102 +739,6 @@ lib/utils/util_STM32.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/utils/util_STM32.cpp.s
 .PHONY : lib/utils/util_STM32.cpp.s
 
-lib/ws2821/dma.obj: lib/ws2821/dma.cpp.obj
-.PHONY : lib/ws2821/dma.obj
-
-# target to build an object file
-lib/ws2821/dma.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/ws2821/dma.cpp.obj
-.PHONY : lib/ws2821/dma.cpp.obj
-
-lib/ws2821/dma.i: lib/ws2821/dma.cpp.i
-.PHONY : lib/ws2821/dma.i
-
-# target to preprocess a source file
-lib/ws2821/dma.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/ws2821/dma.cpp.i
-.PHONY : lib/ws2821/dma.cpp.i
-
-lib/ws2821/dma.s: lib/ws2821/dma.cpp.s
-.PHONY : lib/ws2821/dma.s
-
-# target to generate assembly for a file
-lib/ws2821/dma.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/ws2821/dma.cpp.s
-.PHONY : lib/ws2821/dma.cpp.s
-
-lib/ws2821/gpio.obj: lib/ws2821/gpio.cpp.obj
-.PHONY : lib/ws2821/gpio.obj
-
-# target to build an object file
-lib/ws2821/gpio.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/ws2821/gpio.cpp.obj
-.PHONY : lib/ws2821/gpio.cpp.obj
-
-lib/ws2821/gpio.i: lib/ws2821/gpio.cpp.i
-.PHONY : lib/ws2821/gpio.i
-
-# target to preprocess a source file
-lib/ws2821/gpio.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/ws2821/gpio.cpp.i
-.PHONY : lib/ws2821/gpio.cpp.i
-
-lib/ws2821/gpio.s: lib/ws2821/gpio.cpp.s
-.PHONY : lib/ws2821/gpio.s
-
-# target to generate assembly for a file
-lib/ws2821/gpio.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/ws2821/gpio.cpp.s
-.PHONY : lib/ws2821/gpio.cpp.s
-
-lib/ws2821/tim2.obj: lib/ws2821/tim2.cpp.obj
-.PHONY : lib/ws2821/tim2.obj
-
-# target to build an object file
-lib/ws2821/tim2.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/ws2821/tim2.cpp.obj
-.PHONY : lib/ws2821/tim2.cpp.obj
-
-lib/ws2821/tim2.i: lib/ws2821/tim2.cpp.i
-.PHONY : lib/ws2821/tim2.i
-
-# target to preprocess a source file
-lib/ws2821/tim2.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/ws2821/tim2.cpp.i
-.PHONY : lib/ws2821/tim2.cpp.i
-
-lib/ws2821/tim2.s: lib/ws2821/tim2.cpp.s
-.PHONY : lib/ws2821/tim2.s
-
-# target to generate assembly for a file
-lib/ws2821/tim2.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/ws2821/tim2.cpp.s
-.PHONY : lib/ws2821/tim2.cpp.s
-
-lib/ws2821/ws2821_display.obj: lib/ws2821/ws2821_display.cpp.obj
-.PHONY : lib/ws2821/ws2821_display.obj
-
-# target to build an object file
-lib/ws2821/ws2821_display.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/ws2821/ws2821_display.cpp.obj
-.PHONY : lib/ws2821/ws2821_display.cpp.obj
-
-lib/ws2821/ws2821_display.i: lib/ws2821/ws2821_display.cpp.i
-.PHONY : lib/ws2821/ws2821_display.i
-
-# target to preprocess a source file
-lib/ws2821/ws2821_display.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/ws2821/ws2821_display.cpp.i
-.PHONY : lib/ws2821/ws2821_display.cpp.i
-
-lib/ws2821/ws2821_display.s: lib/ws2821/ws2821_display.cpp.s
-.PHONY : lib/ws2821/ws2821_display.s
-
-# target to generate assembly for a file
-lib/ws2821/ws2821_display.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/firmware.dir/build.make CMakeFiles/firmware.dir/lib/ws2821/ws2821_display.cpp.s
-.PHONY : lib/ws2821/ws2821_display.cpp.s
-
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -835,6 +811,15 @@ help:
 	@echo "... lib/cli/cli.obj"
 	@echo "... lib/cli/cli.i"
 	@echo "... lib/cli/cli.s"
+	@echo "... lib/com-14646/com_14646_matrix.obj"
+	@echo "... lib/com-14646/com_14646_matrix.i"
+	@echo "... lib/com-14646/com_14646_matrix.s"
+	@echo "... lib/com-14646/gpio.obj"
+	@echo "... lib/com-14646/gpio.i"
+	@echo "... lib/com-14646/gpio.s"
+	@echo "... lib/com-14646/tim2.obj"
+	@echo "... lib/com-14646/tim2.i"
+	@echo "... lib/com-14646/tim2.s"
 	@echo "... lib/tetris/TETRIS_GAME_STATE.obj"
 	@echo "... lib/tetris/TETRIS_GAME_STATE.i"
 	@echo "... lib/tetris/TETRIS_GAME_STATE.s"
@@ -862,18 +847,6 @@ help:
 	@echo "... lib/utils/util_STM32.obj"
 	@echo "... lib/utils/util_STM32.i"
 	@echo "... lib/utils/util_STM32.s"
-	@echo "... lib/ws2821/dma.obj"
-	@echo "... lib/ws2821/dma.i"
-	@echo "... lib/ws2821/dma.s"
-	@echo "... lib/ws2821/gpio.obj"
-	@echo "... lib/ws2821/gpio.i"
-	@echo "... lib/ws2821/gpio.s"
-	@echo "... lib/ws2821/tim2.obj"
-	@echo "... lib/ws2821/tim2.i"
-	@echo "... lib/ws2821/tim2.s"
-	@echo "... lib/ws2821/ws2821_display.obj"
-	@echo "... lib/ws2821/ws2821_display.i"
-	@echo "... lib/ws2821/ws2821_display.s"
 	@echo "... src/main.obj"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

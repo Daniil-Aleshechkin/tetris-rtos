@@ -39,10 +39,10 @@
 # define mainPRINT_TASK_PRIORITY (tskIDLE_PRIORITY + 2)
 # define mainINPUT_READ_PRIORITY (tskIDLE_PRIORITY + 1)
 
-static struct pixel red = {0, 255, 0};
-static struct pixel blue = {0, 0, 255};
-static struct pixel green = {255, 0, 0};
-static struct pixel nothing = {0, 0, 0};
+static struct pixel red = {false, true, false};
+static struct pixel blue = {false, false, true};
+static struct pixel green = {true, false, false};
+static struct pixel nothing = {false, false, false};
 
 bool CLI_ENABLED = false;
 
@@ -58,7 +58,7 @@ int frames;
 
 int DAS_TIME = 40000;
 int ARR_TIME = 0;
-bool DAS_ENABLED = true;
+bool DAS_ENABLED = false;
 
 void handleInput(int input);
 void printNum(int num);
@@ -82,13 +82,15 @@ void vPrintTask(void* parameters) {
           __enable_irq();
           
           displayState(state);
-          sendTetrisChars(printState(state));
+          //sendTetrisChars(printState(state));
           xSemaphoreGive(xState);
       }
 
+    } else {
+       __enable_irq();
     }
 
-    vTaskDelay(30);
+    vTaskDelay(1);
 	}
 }
 
@@ -205,18 +207,18 @@ int main() {
   clockInit();
 
   bufferPixel(red, 2, 6);
-	bufferPixel(green, 2, 5);
-	bufferPixel(green, 2, 4);
-	bufferPixel(red, 5, 6);
-	bufferPixel(green, 5, 5);
-	bufferPixel(green, 5, 4);
+	//bufferPixel(green, 2, 5);
+	//bufferPixel(green, 2, 4);
+	//bufferPixel(red, 5, 6);
+	//bufferPixel(green, 5, 5);
+//	bufferPixel(green, 5, 4);
 	
-	bufferPixel(blue, 1, 2);
-	bufferPixel(blue, 2, 1);
-	bufferPixel(blue, 3, 1);
-	bufferPixel(blue, 4, 1);
-	bufferPixel(blue, 5, 1);
-	bufferPixel(blue, 6, 2);
+	//bufferPixel(blue, 1, 2);
+	//bufferPixel(blue, 2, 1);
+	//bufferPixel(blue, 3, 1);
+	//bufferPixel(blue, 4, 1);
+	//bufferPixel(blue, 5, 1);
+	//bufferPixel(blue, 6, 2);
   state = getDefaultTetrisGameState();
   prevLeft = false;
 

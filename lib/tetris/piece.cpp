@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "srs.h"
-#include "ws2821_display.h"
+#include "com_14646_matrix.h"
 
 TetrisGameState* rotatePiece(TetrisGameState *state, Rotation rotation)
 {
@@ -249,15 +249,15 @@ char** printState(TetrisGameState* state) {
     
 }
 
-static pixel I_COLOR = {0x00, 0xff, 0xff};
-static pixel O_COLOR = {0xff, 0xff, 0x00};
-static pixel T_COLOR = {0xff, 0x00, 0xff};
-static pixel S_COLOR = {0x00, 0xff, 0x00};
-static pixel Z_COLOR = {0xff, 0x00, 0x00};
-static pixel J_COLOR = {0x00, 0x00, 0xff};
-static pixel L_COLOR = {0x7f, 0x7f, 0x00};
-static pixel SHADOW_COLOR = {0x7f, 0x7f, 0x7f};
-static pixel NO_COLOR = {0x00, 0x00, 0x00};
+static pixel I_COLOR = {false, true, true};
+static pixel O_COLOR = {true, true, false};
+static pixel T_COLOR = {true, false, true};
+static pixel S_COLOR = {false, true, false};
+static pixel Z_COLOR = {true, false, false};
+static pixel J_COLOR = {false, false, true};
+static pixel L_COLOR = {true, true, false};
+static pixel SHADOW_COLOR = {true, true, true};
+static pixel NO_COLOR = {false, false, false};
 
 struct pixel getPieceColor(PieceType type) {
     switch (type)
@@ -282,49 +282,81 @@ struct pixel getPieceColor(PieceType type) {
 
 }
 
+void drawPiece(PieceType type, Rotation rotation, Position position) {
+    if (type == PieceType::PIECE_TYPE_N) {return;}
+
+    Position* piecePositions = getTetrominoByPieceTypeAndRotation(type, rotation);
+    
+    for (int i = 0; i < 4; i++) {
+        int xPos = piecePositions[i].xpos + position.xpos;
+        int yPos = position.ypos - piecePositions[i].ypos;
+
+        bufferPixel(getPieceColor(type), xPos, yPos);
+    }
+}
+
+void drawGhostPiece(PieceType type, Rotation rotation, Position position) {
+    if (type == PieceType::PIECE_TYPE_N) {return;}
+
+    Position* piecePositions = getTetrominoByPieceTypeAndRotation(type, rotation);
+    
+    for (int i = 0; i < 4; i++) {
+        int xPos = piecePositions[i].xpos + position.xpos;
+        int yPos = position.ypos - piecePositions[i].ypos;
+
+        bufferPixel(SHADOW_COLOR, xPos, yPos);
+    }
+}
+
+
 void displayState(TetrisGameState* state) {
     clearBuffer();
+
+    // frame
+    for (int y = 0; y < 24; y++) {
+        bufferPixel(SHADOW_COLOR, 10, y);
+    }
+
+    for (int y = 0; y < 24; y++) {
+        bufferPixel(SHADOW_COLOR, 21, y);
+    }
+
+
     // hold piece
-    bufferPixel(getPieceColor(state->holdPiece->type), 0, 7);
+    drawPiece(state->holdPiece->type, Rotation::DEG_0, {6, 20});
 
     // queue 
-    bufferPixel(getPieceColor(state->queue->queueStart->data), 7, 7);
-    bufferPixel(getPieceColor(state->queue->queueStart->next->data), 7, 6);
-    bufferPixel(getPieceColor(state->queue->queueStart->next->next->data), 7, 5);
-    bufferPixel(getPieceColor(state->queue->queueStart->next->next->next->data), 7, 4);
-    bufferPixel(getPieceColor(state->queue->queueStart->next->next->next->next->data), 7, 3);
+    drawPiece(state->queue->queueStart->data, Rotation::DEG_0, {22, 20});
+    drawPiece(state->queue->queueStart->next->data, Rotation::DEG_0, {22, 17});
+    drawPiece(state->queue->queueStart->next->next->data, Rotation::DEG_0, {22, 14});
+    drawPiece(state->queue->queueStart->next->next->next->data, Rotation::DEG_0, {22, 11});
+    drawPiece(state->queue->queueStart->next->next->next->next->data, Rotation::DEG_0, {22, 8});
 
     // board (only the middle 4x8 for now)
 
-    for (int x = 3; x < 7; x++) {
-        for (int y = 0; y < 8; y++) {
-            bufferPixel(getPieceColor(state->board[BOARD_HEIGHT - y - 1][x]), x - 1, y);
+    for (int x = 0; x < BOARD_WIDTH; x++) {
+        for (int y = 0; y < BOARD_HEIGHT; y++) {
+            bufferPixel(getPieceColor(state->board[y][x]), x+11, BOARD_HEIGHT-y-1);
         }
     }
-    Position* curPiecePositions = getTetrominoByPieceTypeAndRotation(state->piece->type, state->piece->rotation);
 
     // ghost piece
     Position ghostPiecePos;
     ghostPiecePos.xpos = state->piece->location.xpos;
     ghostPiecePos.ypos = state->piece->location.ypos;
 
-    softDropPosition(state, &ghostPiecePos);
-        for (int i = 0; i < 4; i++) {
-        // check if we should even display it
-        int xPos = curPiecePositions[i].xpos + ghostPiecePos.xpos - 1;
-        int yPos = BOARD_HEIGHT - 1 - (curPiecePositions[i].ypos + ghostPiecePos.ypos);
-        if (xPos >= 2 && xPos < 6 && yPos < 8 && yPos >= 0) {
-            bufferPixel(SHADOW_COLOR, xPos, yPos);
-        }
-    }
+    softDropPosition(state, &ghostPiecePos); 
     
+    ghostPiecePos.xpos += 11;
+    ghostPiecePos.ypos = BOARD_HEIGHT - ghostPiecePos.ypos -1;
+
+    drawGhostPiece(state->piece->type, state->piece->rotation, ghostPiecePos);
+
     // piece
-    for (int i = 0; i < 4; i++) {
-        // check if we should even display it
-        int xPos = curPiecePositions[i].xpos + state->piece->location.xpos - 1;
-        int yPos = BOARD_HEIGHT - 1 - (curPiecePositions[i].ypos + state->piece->location.ypos);
-        if (xPos >= 2 && xPos < 6 && yPos < 8 && yPos >= 0) {
-            bufferPixel(getPieceColor(state->piece->type), xPos, yPos);
-        }
-    }
+    Position curPiecePosition;
+
+    curPiecePosition.xpos = state->piece->location.xpos + 11;
+    curPiecePosition.ypos = BOARD_HEIGHT - state->piece->location.ypos - 1;
+
+    drawPiece(state->piece->type, state->piece->rotation, curPiecePosition);
 }

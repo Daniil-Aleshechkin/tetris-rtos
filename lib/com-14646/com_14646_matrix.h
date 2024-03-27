@@ -1,21 +1,11 @@
-/**
- * @file ws2821_display.h
- * @brief Interface and control logic for WS2812 LED display on STM32.
- *
- * This header file defines the interface and control logic for initializing and managing
- * a WS2812 LED display. It provides functions for initializing the display hardware,
- * buffering individual pixel colors, clearing the display buffer, and refreshing the
- * display to show new pixel data. The implementation uses DMA for efficient data transfer.
- */
+#include "stdbool.h"
 
-#ifndef WS2821_DISPLAY
-#define WS2821_DISPLAY
-
-#include "stdint.h"
-
-#define DISPLAY_WIDTH 8 ///< The width of the LED display in pixels.
-#define DISPLAY_HEIGHT 8 ///< The height of the LED display in pixels.
-
+#ifndef COM_146464_MATRIX 
+#define COM_146464_MATRIX
+ 
+#define DISPLAY_WIDTH 32 ///< The width of the LED display in pixels.
+#define DISPLAY_HEIGHT 32 ///< The height of the LED display in pixels.
+ 
 /**
  * @struct pixel
  * @brief Represents an RGB color pixel.
@@ -23,9 +13,9 @@
  * Defines the structure for an RGB color pixel, with separate byte values for red, green, and blue components.
  */
 struct pixel {
-    uint8_t r; ///< Red component of the pixel.
-    uint8_t g; ///< Green component of the pixel.
-    uint8_t b; ///< Blue component of the pixel.
+    bool r; ///< Red component of the pixel.
+    bool g; ///< Green component of the pixel.
+    bool b; ///< Blue component of the pixel.
 };
 
 /**
@@ -43,16 +33,16 @@ void bufferPixel(struct pixel p, int x, int y);
 /**
  * @brief Refreshes the LED display with buffered pixel data.
  * 
- * Transfers the buffered pixel data to the WS2812 LED display using DMA, effectively
+ * Transfers the buffered pixel data to the COM_14646 LED display using GPIO, effectively
  * refreshing the display with new pixel colors. This function handles the timing and
- * data format required by WS2812 LEDs.
+ * data format required by the COM_14646 LED display.
  */
 void refreshDisplay(void);
 
 /**
- * @brief Initializes the WS2812 LED display.
+ * @brief Initializes the COM_14646 LED display.
  * 
- * Prepares the GPIO, DMA, and timer configurations required for controlling the WS2812 LED display.
+ * Prepares the GPIO configurations required for controlling the COM_14646 LED display.
  * This function must be called before any operations to buffer or display pixel data.
  */
 void displayInit(void);
@@ -65,4 +55,4 @@ void displayInit(void);
  */
 void clearBuffer(void);
 
-#endif /* WS2821_DISPLAY */
+#endif
