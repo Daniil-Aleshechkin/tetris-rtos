@@ -56,9 +56,9 @@ int adcVal;
 bool prevLeft;
 int frames;
 
-int DAS_TIME = 40000;
+int DAS_TIME = 1000;
 int ARR_TIME = 0;
-bool DAS_ENABLED = false;
+bool DAS_ENABLED = true;
 
 void handleInput(int input);
 void printNum(int num);
@@ -75,7 +75,7 @@ void vPrintTask(void* parameters) {
   
   for(;;){
     if (!CLI_ENABLED) {
-
+      
       if (xSemaphoreTake(xState, portMAX_DELAY)) {
           __disable_irq();
           refreshDisplay();
@@ -90,7 +90,7 @@ void vPrintTask(void* parameters) {
        __enable_irq();
     }
 
-    vTaskDelay(1);
+    vTaskDelay(2);
 	}
 }
 
@@ -108,12 +108,13 @@ void vInputTask(void* parameters) {
 
   for(;;){
 		input = readData();
-
+    //sendData(0x55);
+    //vTaskDelay(2);
     if (CLI_ENABLED) {
       if (input != 0x00) {
         xQueueSend(xCLIQueue, &input, 0);
       }
-      vTaskDelay(10);
+      
       continue;
     }
 
@@ -252,7 +253,7 @@ int main() {
   
   xTaskCreate(vPrintTask, "Print", configMINIMAL_STACK_SIZE + 1000, NULL, mainPRINT_TASK_PRIORITY, NULL);
   xTaskCreate(vInputTask, "Input", configMINIMAL_STACK_SIZE, NULL, mainINPUT_READ_PRIORITY, NULL);
-  xTaskCreate(vCLITask, "CLI", configMINIMAL_STACK_SIZE + 1000, NULL, mainCLI_TASK_PRIORITY, NULL);
+  xTaskCreate(vCLITask, "CLI", configMINIMAL_STACK_SIZE + 200, NULL, mainCLI_TASK_PRIORITY, NULL);
   vTaskStartScheduler();
 
   // while (true) {
@@ -267,7 +268,7 @@ int main() {
 
   // }
   for (;;) {
-    sendData(0x55);
+    sendData(0x45);
   }
 }
 

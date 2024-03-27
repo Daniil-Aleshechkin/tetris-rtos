@@ -43,6 +43,7 @@ def get_key_byte(event: tk.Event):
 
 def on_key_press(event: tk.Event):
     key = get_key_byte(event)
+    print("SENDING: ", key)
     ser.write(key)
     
 def on_key_released(event):
@@ -52,6 +53,7 @@ def on_key_released(event):
     code = int.from_bytes(key, 'little')
     code += 128
 
+    print("SENDING RELEASE: ", key)
     ser.write(code.to_bytes(1, 'little'))
 
 

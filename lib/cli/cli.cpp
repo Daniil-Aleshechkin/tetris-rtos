@@ -280,8 +280,6 @@ void vCLITask(void* parameters) {
 	int value;
 
 	for(;;){
-		//continue;
-
 		if (xQueueReceive(xCLIQueue, &recievedChar, 0) == pdTRUE) {
 			if (recievedChar == 0x0D &&  bufferIndex != 0)  {
 				// Send command code here
