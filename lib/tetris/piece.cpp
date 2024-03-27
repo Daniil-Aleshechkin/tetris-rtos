@@ -273,7 +273,7 @@ struct pixel getPieceColor(PieceType type) {
     case PIECE_TYPE_T:
         return T_COLOR;
     case PIECE_TYPE_S:
-        return Z_COLOR;
+        return S_COLOR;
     case PIECE_TYPE_L:
         return L_COLOR;
     default:
