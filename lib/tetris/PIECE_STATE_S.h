@@ -52,7 +52,7 @@ const Position PIECE_S_90[4] = {
  * x x o
  */
 const Position PIECE_S_180[4] = {
-{2, 2}, {1, 1}, {2, 1}, {1, 2},
+{0, 2}, {1, 1}, {2, 1}, {1, 2},
 };
 
 /**
