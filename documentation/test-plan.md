@@ -15,7 +15,7 @@ The test methods outlined below are designed to rigorously validate the function
 ### Multimeter Current Draw
 
 - **Objective**: Measure the current draw of the LED matrix display to ensure it meets power consumption requirements.
-- **Method**: Connect a multimeter in series with the power supply of the LED matrix display. Measure the current while the Tetris game is active and displaying various states (e.g., game in progress, displaying next pieces, etc.).
+- **Method**: Connect a multimeter in series with the power supply of the LED matrix display. Measure the current while the Tetris game is active and displaying various states. And while the whole display is activec
 - **Pass Criteria**: The current draw should be within the specified limits for the hardware used, ensuring efficient power use and preventing overheating.
 
 ## Functionality Tests
