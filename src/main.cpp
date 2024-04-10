@@ -6,8 +6,7 @@
  * The unique challenge of this project was to efficiently manage system resources and ensure smooth gameplay, even as the game's complexity increases. 
  * The implementation required careful attention to task prioritization, synchronization, and real-time input handling, making it a compelling example of an embedded system with RTOS.
  * 
- * Development Environment: The project is developed using the STM32CubeIDE for coding and debugging. 
- * The project structure and build configurations are managed within this IDE, simplifying the development process for STM32-based projects.
+ * Development Environment: The project is developed using the GNU arm-none-eabi toolkit
  * 
  * Compiler: ARM GCC 13.2.90.20231008-git
  * The project relies on specific features and optimizations available in this version of the ARM GCC compiler, ensuring compatibility and performance on the target hardware.
@@ -16,10 +15,10 @@
  * 
  * Other Tools: ST-Link for flashing and debugging the microcontroller. usbipd-win for USB over IP, facilitating communication between the WSL environment and the STM32 board.
  * 
- * CPU Configuration: STM32F103xB; The microcontroller is configured for a 72 MHz system clock, with all peripheral clocks appropriately divided. 
+ * CPU Configuration: STM32F103xB; The microcontroller is configured for a 24 MHz system clock, with all peripheral clocks appropriately divided. 
  * Specific attention is paid to USART and GPIO configurations to support game input and display output.
  * 
- * Build Instructions: Use the provided Makefile for building the project. Run `make all` to compile the firmware and `make flash` to flash it to the STM32 board. 
+ * Build Instructions: Use the provided Makefile for building the project. Run 'cmake -DPROJECT_NAME=firmware -DCMAKE_BUILD_TYPE=Debug -DDUMP_ASM=OFF' to generate the make file. Then run `make all` to compile the firmware and `st-flash --reset write ./firmware.bin 0x08000000` to flash it to the STM32 board. 
  * Ensure `usbipd` is correctly set up if using WSL to connect to the device.
  *********************************************************************************/
 

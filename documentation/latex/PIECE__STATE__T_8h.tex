@@ -1,0 +1,132 @@
+\hypertarget{PIECE__STATE__T_8h}{}\doxysection{lib/tetris/\+PIECE\+\_\+\+STATE\+\_\+T.h File Reference}
+\label{PIECE__STATE__T_8h}\index{lib/tetris/PIECE\_STATE\_T.h@{lib/tetris/PIECE\_STATE\_T.h}}
+
+
+Defines the rotation states for the Tetris \char`\"{}\+T\char`\"{} piece.  
+
+
+{\ttfamily \#include \char`\"{}TETRIS\+\_\+\+ENUMS.\+h\char`\"{}}\newline
+Include dependency graph for PIECE\+\_\+\+STATE\+\_\+\+T.\+h\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structPosition}{Position}} $\ast$ \mbox{\hyperlink{PIECE__STATE__T_8h_ab7dc9ec502506a3f11e9cf70060f9ed3}{get\+TPiece\+By\+Rotation}} (\mbox{\hyperlink{TETRIS__ENUMS_8h_a4940d1dc528122726d2c8c475657e1a9}{Rotation}} rotation)
+\begin{DoxyCompactList}\small\item\em Retrieves the positions of the \char`\"{}\+T\char`\"{} piece for a given rotation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{structPosition}{Position}} \mbox{\hyperlink{PIECE__STATE__T_8h_af5523cd1d81918b18b3a1a446b67d704}{PIECE\+\_\+\+T\+\_\+0}} \mbox{[}4\mbox{]}
+\begin{DoxyCompactList}\small\item\em Positions for the \char`\"{}\+T\char`\"{} piece in a 0-\/degree rotation. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structPosition}{Position}} \mbox{\hyperlink{PIECE__STATE__T_8h_ae680334a75b45f2b01974cb45fd1dd58}{PIECE\+\_\+\+T\+\_\+90}} \mbox{[}4\mbox{]}
+\begin{DoxyCompactList}\small\item\em Positions for the \char`\"{}\+T\char`\"{} piece in a 90-\/degree rotation. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structPosition}{Position}} \mbox{\hyperlink{PIECE__STATE__T_8h_aa2dbf35bc6278186c027b2da3964f3d2}{PIECE\+\_\+\+T\+\_\+180}} \mbox{[}4\mbox{]}
+\begin{DoxyCompactList}\small\item\em Positions for the \char`\"{}\+T\char`\"{} piece in a 180-\/degree rotation. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structPosition}{Position}} \mbox{\hyperlink{PIECE__STATE__T_8h_a07636e9a7313e91df635bc8409b8133b}{PIECE\+\_\+\+T\+\_\+270}} \mbox{[}4\mbox{]}
+\begin{DoxyCompactList}\small\item\em Positions for the \char`\"{}\+T\char`\"{} piece in a 270-\/degree rotation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines the rotation states for the Tetris \char`\"{}\+T\char`\"{} piece. 
+
+This header file contains the definitions for the layout of the Tetris \char`\"{}\+T\char`\"{} piece for each of its four possible rotations (0, 90, 180, and 270 degrees). It also declares a function for retrieving the \char`\"{}\+T\char`\"{} piece\textquotesingle{}s layout based on its current rotation, facilitating its placement and movement on the game board. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{PIECE__STATE__T_8h_ab7dc9ec502506a3f11e9cf70060f9ed3}\label{PIECE__STATE__T_8h_ab7dc9ec502506a3f11e9cf70060f9ed3}} 
+\index{PIECE\_STATE\_T.h@{PIECE\_STATE\_T.h}!getTPieceByRotation@{getTPieceByRotation}}
+\index{getTPieceByRotation@{getTPieceByRotation}!PIECE\_STATE\_T.h@{PIECE\_STATE\_T.h}}
+\doxysubsubsection{\texorpdfstring{getTPieceByRotation()}{getTPieceByRotation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structPosition}{Position}}$\ast$ get\+TPiece\+By\+Rotation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{TETRIS__ENUMS_8h_a4940d1dc528122726d2c8c475657e1a9}{Rotation}}}]{rotation }\end{DoxyParamCaption})}
+
+
+
+Retrieves the positions of the \char`\"{}\+T\char`\"{} piece for a given rotation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rotation} & The rotation angle (0, 90, 180, 270) of the \char`\"{}\+T\char`\"{} piece. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the array of \mbox{\hyperlink{structPosition}{Position}} structs representing the \char`\"{}\+T\char`\"{} piece\textquotesingle{}s layout for the given rotation. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{PIECE__STATE__T_8h_af5523cd1d81918b18b3a1a446b67d704}\label{PIECE__STATE__T_8h_af5523cd1d81918b18b3a1a446b67d704}} 
+\index{PIECE\_STATE\_T.h@{PIECE\_STATE\_T.h}!PIECE\_T\_0@{PIECE\_T\_0}}
+\index{PIECE\_T\_0@{PIECE\_T\_0}!PIECE\_STATE\_T.h@{PIECE\_STATE\_T.h}}
+\doxysubsubsection{\texorpdfstring{PIECE\_T\_0}{PIECE\_T\_0}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structPosition}{Position}} PIECE\+\_\+\+T\+\_\+0\mbox{[}4\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{\{1, 1\}, \{0, 1\}, \{2, 1\}, \{1, 0\},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Positions for the \char`\"{}\+T\char`\"{} piece in a 0-\/degree rotation. 
+
+Represents the \char`\"{}\+T\char`\"{} piece\textquotesingle{}s layout when it has not been rotated. The layout is visualized as follows, with \textquotesingle{}x\textquotesingle{} marking the occupied cells\+:
+
+o x o x x x o o o \mbox{\Hypertarget{PIECE__STATE__T_8h_aa2dbf35bc6278186c027b2da3964f3d2}\label{PIECE__STATE__T_8h_aa2dbf35bc6278186c027b2da3964f3d2}} 
+\index{PIECE\_STATE\_T.h@{PIECE\_STATE\_T.h}!PIECE\_T\_180@{PIECE\_T\_180}}
+\index{PIECE\_T\_180@{PIECE\_T\_180}!PIECE\_STATE\_T.h@{PIECE\_STATE\_T.h}}
+\doxysubsubsection{\texorpdfstring{PIECE\_T\_180}{PIECE\_T\_180}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structPosition}{Position}} PIECE\+\_\+\+T\+\_\+180\mbox{[}4\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{\{1, 2\}, \{0, 1\}, \{1, 1\}, \{2, 1\},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Positions for the \char`\"{}\+T\char`\"{} piece in a 180-\/degree rotation. 
+
+Represents the \char`\"{}\+T\char`\"{} piece\textquotesingle{}s layout when it is rotated 180 degrees. The layout is visualized as follows\+:
+
+o o o x x x o x o \mbox{\Hypertarget{PIECE__STATE__T_8h_a07636e9a7313e91df635bc8409b8133b}\label{PIECE__STATE__T_8h_a07636e9a7313e91df635bc8409b8133b}} 
+\index{PIECE\_STATE\_T.h@{PIECE\_STATE\_T.h}!PIECE\_T\_270@{PIECE\_T\_270}}
+\index{PIECE\_T\_270@{PIECE\_T\_270}!PIECE\_STATE\_T.h@{PIECE\_STATE\_T.h}}
+\doxysubsubsection{\texorpdfstring{PIECE\_T\_270}{PIECE\_T\_270}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structPosition}{Position}} PIECE\+\_\+\+T\+\_\+270\mbox{[}4\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{\{1, 0\}, \{0, 1\}, \{1, 1\}, \{1, 2\},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Positions for the \char`\"{}\+T\char`\"{} piece in a 270-\/degree rotation. 
+
+Represents the \char`\"{}\+T\char`\"{} piece\textquotesingle{}s layout when it is rotated 270 degrees clockwise. The layout is visualized as follows\+:
+
+o x o x x o o x o \mbox{\Hypertarget{PIECE__STATE__T_8h_ae680334a75b45f2b01974cb45fd1dd58}\label{PIECE__STATE__T_8h_ae680334a75b45f2b01974cb45fd1dd58}} 
+\index{PIECE\_STATE\_T.h@{PIECE\_STATE\_T.h}!PIECE\_T\_90@{PIECE\_T\_90}}
+\index{PIECE\_T\_90@{PIECE\_T\_90}!PIECE\_STATE\_T.h@{PIECE\_STATE\_T.h}}
+\doxysubsubsection{\texorpdfstring{PIECE\_T\_90}{PIECE\_T\_90}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structPosition}{Position}} PIECE\+\_\+\+T\+\_\+90\mbox{[}4\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{\{1, 0\}, \{1, 1\}, \{1, 2\}, \{2, 1\},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Positions for the \char`\"{}\+T\char`\"{} piece in a 90-\/degree rotation. 
+
+Represents the \char`\"{}\+T\char`\"{} piece\textquotesingle{}s layout when it is rotated 90 degrees clockwise. The layout is visualized as follows\+:
+
+o x o o x x o x o 

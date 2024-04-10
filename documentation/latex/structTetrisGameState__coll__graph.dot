@@ -1,0 +1,18 @@
+digraph "TetrisGameState"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="TetrisGameState",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Represents the complete state of a Tetris game."];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" piece" ];
+  Node2 [label="CurrentPiece",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structCurrentPiece.html",tooltip="Represents the currently active Tetris piece."];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" location" ];
+  Node3 [label="Position",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structPosition.html",tooltip="Represents a position on the Tetris game board."];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" queue" ];
+  Node4 [label="Queue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structQueue.html",tooltip="Represents the queue of Tetris pieces."];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" queueEnd\nqueueStart" ];
+  Node5 [label="QueueElement",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structQueueElement.html",tooltip="Represents an element in the queue."];
+  Node5 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" next" ];
+  Node6 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" holdPiece" ];
+  Node6 [label="HoldPiece",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structHoldPiece.html",tooltip="Represents the Tetris piece held in reserve."];
+}

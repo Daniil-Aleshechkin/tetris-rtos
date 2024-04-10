@@ -1,0 +1,45 @@
+\hypertarget{PIECE__STATE__O_8h}{}\doxysection{lib/tetris/\+PIECE\+\_\+\+STATE\+\_\+O.h File Reference}
+\label{PIECE__STATE__O_8h}\index{lib/tetris/PIECE\_STATE\_O.h@{lib/tetris/PIECE\_STATE\_O.h}}
+
+
+Defines the static state for the Tetris \char`\"{}\+O\char`\"{} piece.  
+
+
+{\ttfamily \#include \char`\"{}TETRIS\+\_\+\+ENUMS.\+h\char`\"{}}\newline
+Include dependency graph for PIECE\+\_\+\+STATE\+\_\+\+O.\+h\+:
+% FIG 0
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{structPosition}{Position}} \mbox{\hyperlink{PIECE__STATE__O_8h_a95af916a9619aa92afc0486fe4ee05bf}{PIECE\+\_\+O}} \mbox{[}4\mbox{]}
+\begin{DoxyCompactList}\small\item\em Positions for the \char`\"{}\+O\char`\"{} piece in all rotations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines the static state for the Tetris \char`\"{}\+O\char`\"{} piece. 
+
+This header file contains the definition for the layout of the Tetris \char`\"{}\+O\char`\"{} piece. The \char`\"{}\+O\char`\"{} piece is unique in that it does not change its orientation with rotation. The layout is a 2x2 square, which remains constant regardless of rotation commands. 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{PIECE__STATE__O_8h_a95af916a9619aa92afc0486fe4ee05bf}\label{PIECE__STATE__O_8h_a95af916a9619aa92afc0486fe4ee05bf}} 
+\index{PIECE\_STATE\_O.h@{PIECE\_STATE\_O.h}!PIECE\_O@{PIECE\_O}}
+\index{PIECE\_O@{PIECE\_O}!PIECE\_STATE\_O.h@{PIECE\_STATE\_O.h}}
+\doxysubsubsection{\texorpdfstring{PIECE\_O}{PIECE\_O}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structPosition}{Position}} PIECE\+\_\+O\mbox{[}4\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{\{0, 0\}, \{1, 0\}, \{0, 1\}, \{1, 1\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Positions for the \char`\"{}\+O\char`\"{} piece in all rotations. 
+
+Represents the \char`\"{}\+O\char`\"{} piece\textquotesingle{}s layout, which does not change with rotation. The layout is visualized as follows, with \textquotesingle{}x\textquotesingle{} marking the occupied cells\+:
+
+x x x x
+
+Since the \char`\"{}\+O\char`\"{} piece does not rotate, these positions are used for all rotations. 

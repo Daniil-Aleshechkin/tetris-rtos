@@ -1,0 +1,223 @@
+\hypertarget{piece_8h}{}\doxysection{lib/tetris/piece.h File Reference}
+\label{piece_8h}\index{lib/tetris/piece.h@{lib/tetris/piece.h}}
+
+
+Functions for Tetris piece operations and game state management.  
+
+
+{\ttfamily \#include \char`\"{}TETRIS\+\_\+\+ENUMS.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}board.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}TETRIS\+\_\+\+GAME\+\_\+\+STATE.\+h\char`\"{}}\newline
+Include dependency graph for piece.\+h\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{piece_8h_a8367d1902ae8e8818296c7534a2fe99e}\label{piece_8h_a8367d1902ae8e8818296c7534a2fe99e}} 
+\#define {\bfseries HOLDPIECEWIDTH}~5
+\item 
+\mbox{\Hypertarget{piece_8h_afff01f02cb571464b8ec468eeab55a42}\label{piece_8h_afff01f02cb571464b8ec468eeab55a42}} 
+\#define {\bfseries QUEUEWIDTH}~5
+\item 
+\mbox{\Hypertarget{piece_8h_a769b16acab73eda44c44ed45a5037a96}\label{piece_8h_a769b16acab73eda44c44ed45a5037a96}} 
+\#define {\bfseries LONG\+\_\+\+BOARD\+\_\+\+WIDTH}~(HOLDPIECEWIDTH + BOARD\+\_\+\+WIDTH + QUEUEWIDTH + 2)
+\item 
+\mbox{\Hypertarget{piece_8h_ad4998dca858e2670e2179ef123389909}\label{piece_8h_ad4998dca858e2670e2179ef123389909}} 
+\#define {\bfseries SHORT\+\_\+\+BOARD\+\_\+\+WIDTH}~(HOLDPIECEWIDTH + BOARD\+\_\+\+WIDTH + 2)
+\item 
+\mbox{\Hypertarget{piece_8h_a6b4369939458dac30b1a83847f3bc584}\label{piece_8h_a6b4369939458dac30b1a83847f3bc584}} 
+\#define {\bfseries QUEUEHEIGHT}~14
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$ \mbox{\hyperlink{piece_8h_a6cf22a179975e468213136455060224e}{rotate\+Piece}} (\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$state, \mbox{\hyperlink{TETRIS__ENUMS_8h_a4940d1dc528122726d2c8c475657e1a9}{Rotation}} rotation)
+\begin{DoxyCompactList}\small\item\em Rotate the current piece in the game state. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$ \mbox{\hyperlink{piece_8h_a88d4a89c11014ff06dd769d55710b279}{soft\+Drop\+Piece}} (\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Soft drop the current piece. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$ \mbox{\hyperlink{piece_8h_a2762eacfa01604448926a229fa68144a}{hard\+Drop\+Piece}} (\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Hard drop the current piece. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$ \mbox{\hyperlink{piece_8h_a01767d1f2fed936849361d3b8590ff51}{move\+Piece}} (\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$state, bool is\+Left)
+\begin{DoxyCompactList}\small\item\em Move the current piece left or right. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$ \mbox{\hyperlink{piece_8h_a8ba4d5c9071a05a2ed64b22749860518}{reset}} (\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Reset the game state to its default configuration. \end{DoxyCompactList}\item 
+char $\ast$$\ast$ \mbox{\hyperlink{piece_8h_ab17396ad7d358e6fe86ec439740e2cf4}{print\+State}} (\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Print the current game state to a string array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{piece_8h_ae44c6708b4cdc20ab69b16aa7763bbf3}{free\+Printed\+Bytes}} (char $\ast$$\ast$printed\+State)
+\begin{DoxyCompactList}\small\item\em Free the memory allocated for the printed state. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{piece_8h_aaaeeaf6e9ec3eefa2b118df20b9aa0da}{get\+Char\+From\+Piece\+Type}} (\mbox{\hyperlink{TETRIS__ENUMS_8h_a12ed9719bbdf7bc596ff7a6f4bf3f021}{Piece\+Type}} piece\+Type)
+\begin{DoxyCompactList}\small\item\em Get the character representation of a Tetris piece type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{piece_8h_aca60f99985e048b2f563b78d56854b49}{display\+State}} (\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Display the current game state on the WS2821 LED display. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for Tetris piece operations and game state management. 
+
+This header file provides declarations for functions involved in rotating, moving, dropping Tetris pieces, and managing the Tetris game state. It includes utilities for printing the game state to a terminal or a specific display and for resetting the game state. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{piece_8h_aca60f99985e048b2f563b78d56854b49}\label{piece_8h_aca60f99985e048b2f563b78d56854b49}} 
+\index{piece.h@{piece.h}!displayState@{displayState}}
+\index{displayState@{displayState}!piece.h@{piece.h}}
+\doxysubsubsection{\texorpdfstring{displayState()}{displayState()}}
+{\footnotesize\ttfamily void display\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+
+
+Display the current game state on the WS2821 LED display. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & Pointer to the current game state. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{piece_8h_ae44c6708b4cdc20ab69b16aa7763bbf3}\label{piece_8h_ae44c6708b4cdc20ab69b16aa7763bbf3}} 
+\index{piece.h@{piece.h}!freePrintedBytes@{freePrintedBytes}}
+\index{freePrintedBytes@{freePrintedBytes}!piece.h@{piece.h}}
+\doxysubsubsection{\texorpdfstring{freePrintedBytes()}{freePrintedBytes()}}
+{\footnotesize\ttfamily void free\+Printed\+Bytes (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{printed\+State }\end{DoxyParamCaption})}
+
+
+
+Free the memory allocated for the printed state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em printed\+State} & 2D array of chars representing the printed state. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{piece_8h_aaaeeaf6e9ec3eefa2b118df20b9aa0da}\label{piece_8h_aaaeeaf6e9ec3eefa2b118df20b9aa0da}} 
+\index{piece.h@{piece.h}!getCharFromPieceType@{getCharFromPieceType}}
+\index{getCharFromPieceType@{getCharFromPieceType}!piece.h@{piece.h}}
+\doxysubsubsection{\texorpdfstring{getCharFromPieceType()}{getCharFromPieceType()}}
+{\footnotesize\ttfamily char get\+Char\+From\+Piece\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{TETRIS__ENUMS_8h_a12ed9719bbdf7bc596ff7a6f4bf3f021}{Piece\+Type}}}]{piece\+Type }\end{DoxyParamCaption})}
+
+
+
+Get the character representation of a Tetris piece type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em piece\+Type} & The Tetris piece type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Character representing the piece type. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{piece_8h_a2762eacfa01604448926a229fa68144a}\label{piece_8h_a2762eacfa01604448926a229fa68144a}} 
+\index{piece.h@{piece.h}!hardDropPiece@{hardDropPiece}}
+\index{hardDropPiece@{hardDropPiece}!piece.h@{piece.h}}
+\doxysubsubsection{\texorpdfstring{hardDropPiece()}{hardDropPiece()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}}$\ast$ hard\+Drop\+Piece (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+
+
+Hard drop the current piece. 
+
+Instantly moves the current piece to its lowest possible position.
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & Pointer to the current game state. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the updated game state after hard dropping the piece. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{piece_8h_a01767d1f2fed936849361d3b8590ff51}\label{piece_8h_a01767d1f2fed936849361d3b8590ff51}} 
+\index{piece.h@{piece.h}!movePiece@{movePiece}}
+\index{movePiece@{movePiece}!piece.h@{piece.h}}
+\doxysubsubsection{\texorpdfstring{movePiece()}{movePiece()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}}$\ast$ move\+Piece (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$}]{state,  }\item[{bool}]{is\+Left }\end{DoxyParamCaption})}
+
+
+
+Move the current piece left or right. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & Pointer to the current game state. \\
+\hline
+{\em is\+Left} & Boolean indicating the direction of movement (true for left, false for right). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the updated game state after moving the piece. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{piece_8h_ab17396ad7d358e6fe86ec439740e2cf4}\label{piece_8h_ab17396ad7d358e6fe86ec439740e2cf4}} 
+\index{piece.h@{piece.h}!printState@{printState}}
+\index{printState@{printState}!piece.h@{piece.h}}
+\doxysubsubsection{\texorpdfstring{printState()}{printState()}}
+{\footnotesize\ttfamily char$\ast$$\ast$ print\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+
+
+Print the current game state to a string array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & Pointer to the current game state. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+2D array of chars representing the printed state. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{piece_8h_a8ba4d5c9071a05a2ed64b22749860518}\label{piece_8h_a8ba4d5c9071a05a2ed64b22749860518}} 
+\index{piece.h@{piece.h}!reset@{reset}}
+\index{reset@{reset}!piece.h@{piece.h}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}}$\ast$ reset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+
+
+Reset the game state to its default configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & Pointer to the current game state. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the reset game state. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{piece_8h_a6cf22a179975e468213136455060224e}\label{piece_8h_a6cf22a179975e468213136455060224e}} 
+\index{piece.h@{piece.h}!rotatePiece@{rotatePiece}}
+\index{rotatePiece@{rotatePiece}!piece.h@{piece.h}}
+\doxysubsubsection{\texorpdfstring{rotatePiece()}{rotatePiece()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}}$\ast$ rotate\+Piece (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$}]{state,  }\item[{\mbox{\hyperlink{TETRIS__ENUMS_8h_a4940d1dc528122726d2c8c475657e1a9}{Rotation}}}]{rotation }\end{DoxyParamCaption})}
+
+
+
+Rotate the current piece in the game state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & Pointer to the current game state. \\
+\hline
+{\em rotation} & The rotation direction (DEG\+\_\+0, DEG\+\_\+90, DEG\+\_\+180, DEG\+\_\+270). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the updated game state after rotation. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{piece_8h_a88d4a89c11014ff06dd769d55710b279}\label{piece_8h_a88d4a89c11014ff06dd769d55710b279}} 
+\index{piece.h@{piece.h}!softDropPiece@{softDropPiece}}
+\index{softDropPiece@{softDropPiece}!piece.h@{piece.h}}
+\doxysubsubsection{\texorpdfstring{softDropPiece()}{softDropPiece()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}}$\ast$ soft\+Drop\+Piece (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structTetrisGameState}{Tetris\+Game\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+
+
+Soft drop the current piece. 
+
+Moves the current piece down until it hits an obstacle.
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & Pointer to the current game state. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the updated game state after soft dropping the piece. 
+\end{DoxyReturn}

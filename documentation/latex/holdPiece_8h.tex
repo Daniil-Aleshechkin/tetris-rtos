@@ -1,0 +1,47 @@
+\hypertarget{holdPiece_8h}{}\doxysection{lib/tetris/hold\+Piece.h File Reference}
+\label{holdPiece_8h}\index{lib/tetris/holdPiece.h@{lib/tetris/holdPiece.h}}
+
+
+Interface for holding a Tetris piece.  
+
+
+{\ttfamily \#include \char`\"{}TETRIS\+\_\+\+GAME\+\_\+\+STATE.\+h\char`\"{}}\newline
+Include dependency graph for hold\+Piece.\+h\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{holdPiece_8h_a2caa93426f68abe49f394aed1ec8f8fa}{hold\+Piece}} (\mbox{\hyperlink{structHoldPiece}{Hold\+Piece}} $\ast$hold, \mbox{\hyperlink{structQueue}{Queue}} $\ast$queue, \mbox{\hyperlink{structCurrentPiece}{Current\+Piece}} $\ast$piece)
+\begin{DoxyCompactList}\small\item\em Holds or swaps the current Tetris piece. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for holding a Tetris piece. 
+
+Provides functionality to hold a Tetris piece for later use. This file includes the declaration of the function used to swap the current active piece with the one in hold, if any. It integrates with the game\textquotesingle{}s state management by accessing and modifying the current piece and the queue of upcoming pieces. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{holdPiece_8h_a2caa93426f68abe49f394aed1ec8f8fa}\label{holdPiece_8h_a2caa93426f68abe49f394aed1ec8f8fa}} 
+\index{holdPiece.h@{holdPiece.h}!holdPiece@{holdPiece}}
+\index{holdPiece@{holdPiece}!holdPiece.h@{holdPiece.h}}
+\doxysubsubsection{\texorpdfstring{holdPiece()}{holdPiece()}}
+{\footnotesize\ttfamily void hold\+Piece (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structHoldPiece}{Hold\+Piece}} $\ast$}]{hold,  }\item[{\mbox{\hyperlink{structQueue}{Queue}} $\ast$}]{queue,  }\item[{\mbox{\hyperlink{structCurrentPiece}{Current\+Piece}} $\ast$}]{piece }\end{DoxyParamCaption})}
+
+
+
+Holds or swaps the current Tetris piece. 
+
+This function allows a player to hold the current piece or swap it with an already held piece. It ensures that a piece can only be held once until a new piece is spawned. If no piece is currently held, the function places the current piece in hold and retrieves the next piece from the queue.
+
+
+\begin{DoxyParams}{Parameters}
+{\em hold\+Piece} & The current hold state, including whether a piece is held and its type. \\
+\hline
+{\em queue} & The queue of upcoming pieces. \\
+\hline
+{\em current\+Piece} & The current active piece.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function modifies the hold\+Piece, queue, and current\+Piece structures. 
+\end{DoxyNote}

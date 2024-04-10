@@ -1,0 +1,81 @@
+\hypertarget{cli_8h}{}\doxysection{lib/cli/cli.h File Reference}
+\label{cli_8h}\index{lib/cli/cli.h@{lib/cli/cli.h}}
+
+
+Command Line Interface (CLI) for Tetris game running on Free\+RTOS.  
+
+
+{\ttfamily \#include \char`\"{}stdlib.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stdint.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Free\+RTOS.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}task.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}queue.\+h\char`\"{}}\newline
+Include dependency graph for cli.\+h\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{cli_8h_a171942fec8514f56e10c890f14a679b2}\label{cli_8h_a171942fec8514f56e10c890f14a679b2}} 
+\#define {\bfseries main\+CLI\+\_\+\+TASK\+\_\+\+PRIORITY}~(tsk\+IDLE\+\_\+\+PRIORITY + 1)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{cli_8h_ad1b1f4c4d50c23c815157c15ff35fba3}{v\+CLITask}} (void $\ast$parameters)
+\begin{DoxyCompactList}\small\item\em Initialize and run the CLI task. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cli_8h_afd98dc4d70d0c9f1f0a246c489906a02}{clear\+Screan}} ()
+\begin{DoxyCompactList}\small\item\em Clear the CLI screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Queue\+Handle\+\_\+t \mbox{\hyperlink{cli_8h_a31e2fd6a0eb940592c2c87db602a115f}{x\+CLIQueue}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structQueue}{Queue}} handle for CLI commands. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Command Line Interface (CLI) for Tetris game running on Free\+RTOS. 
+
+This header file defines the interfaces for a Command Line Interface (CLI) that allows users to interact with the Tetris game and controls the settings via a serial terminal. It includes definitions for initializing the CLI, processing user input, and executing commands. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{cli_8h_afd98dc4d70d0c9f1f0a246c489906a02}\label{cli_8h_afd98dc4d70d0c9f1f0a246c489906a02}} 
+\index{cli.h@{cli.h}!clearScrean@{clearScrean}}
+\index{clearScrean@{clearScrean}!cli.h@{cli.h}}
+\doxysubsubsection{\texorpdfstring{clearScrean()}{clearScrean()}}
+{\footnotesize\ttfamily void clear\+Screan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear the CLI screen. 
+
+This function sends ANSI escape codes to clear the serial terminal screen and reset the cursor position. It\textquotesingle{}s used to refresh the CLI interface. \mbox{\Hypertarget{cli_8h_ad1b1f4c4d50c23c815157c15ff35fba3}\label{cli_8h_ad1b1f4c4d50c23c815157c15ff35fba3}} 
+\index{cli.h@{cli.h}!vCLITask@{vCLITask}}
+\index{vCLITask@{vCLITask}!cli.h@{cli.h}}
+\doxysubsubsection{\texorpdfstring{vCLITask()}{vCLITask()}}
+{\footnotesize\ttfamily void v\+CLITask (\begin{DoxyParamCaption}\item[{void $\ast$}]{parameters }\end{DoxyParamCaption})}
+
+
+
+Initialize and run the CLI task. 
+
+This function initializes the CLI environment and starts the CLI task for processing user commands. It should be called during the system initialization phase.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parameters} & Pointer to parameters passed to the task if any (usually NULL). \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{cli_8h_a31e2fd6a0eb940592c2c87db602a115f}\label{cli_8h_a31e2fd6a0eb940592c2c87db602a115f}} 
+\index{cli.h@{cli.h}!xCLIQueue@{xCLIQueue}}
+\index{xCLIQueue@{xCLIQueue}!cli.h@{cli.h}}
+\doxysubsubsection{\texorpdfstring{xCLIQueue}{xCLIQueue}}
+{\footnotesize\ttfamily Queue\+Handle\+\_\+t x\+CLIQueue\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+\mbox{\hyperlink{structQueue}{Queue}} handle for CLI commands. 
+
+This queue is used to communicate between the user input task that receives serial data and the CLI task that processes the commands. 

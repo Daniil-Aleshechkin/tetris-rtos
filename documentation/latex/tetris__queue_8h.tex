@@ -1,0 +1,158 @@
+\hypertarget{tetris__queue_8h}{}\doxysection{lib/tetris/tetris\+\_\+queue.h File Reference}
+\label{tetris__queue_8h}\index{lib/tetris/tetris\_queue.h@{lib/tetris/tetris\_queue.h}}
+
+
+Functions and structures for managing the Tetris piece queue.  
+
+
+{\ttfamily \#include \char`\"{}TETRIS\+\_\+\+ENUMS.\+h\char`\"{}}\newline
+Include dependency graph for tetris\+\_\+queue.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structQueueElement}{Queue\+Element}}
+\begin{DoxyCompactList}\small\item\em Represents an element in the queue. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structQueue}{Queue}}
+\begin{DoxyCompactList}\small\item\em Represents the queue of Tetris pieces. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{tetris__queue_8h_ab5fb032852508af8e6f3d8566d7b7276}{add\+Bag}} (\mbox{\hyperlink{structQueue}{Queue}} $\ast$queue)
+\begin{DoxyCompactList}\small\item\em Adds a randomized bag of Tetris pieces to the queue. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{TETRIS__ENUMS_8h_a12ed9719bbdf7bc596ff7a6f4bf3f021}{Piece\+Type}} \mbox{\hyperlink{tetris__queue_8h_a32d3719090d9d6b3f3af1030b8a84c59}{pop\+Queue}} (\mbox{\hyperlink{structQueue}{Queue}} $\ast$queue)
+\begin{DoxyCompactList}\small\item\em Removes and returns the first Tetris piece from the queue. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{TETRIS__ENUMS_8h_a12ed9719bbdf7bc596ff7a6f4bf3f021}{Piece\+Type}} $\ast$ \mbox{\hyperlink{tetris__queue_8h_af9445dd73942342dbbaf5acdc62202d4}{peek\+Queue}} (\mbox{\hyperlink{structQueue}{Queue}} $\ast$queue, int size)
+\begin{DoxyCompactList}\small\item\em Peeks at the first few pieces in the queue without removing them. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{TETRIS__ENUMS_8h_a12ed9719bbdf7bc596ff7a6f4bf3f021}{Piece\+Type}} $\ast$ \mbox{\hyperlink{tetris__queue_8h_a73eae34a700934f27c9778d4c56d8fc0}{generate\+Bag}} ()
+\begin{DoxyCompactList}\small\item\em Generates a randomized bag of all seven Tetris piece types. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structQueue}{Queue}} $\ast$ \mbox{\hyperlink{tetris__queue_8h_a6703fdea715e9107d140bfb5cac84d1e}{allocate\+Queue}} (int size, const \mbox{\hyperlink{TETRIS__ENUMS_8h_a12ed9719bbdf7bc596ff7a6f4bf3f021}{Piece\+Type}} queue\+Data\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Allocates and initializes a queue with the specified Tetris pieces. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structQueue}{Queue}} $\ast$ \mbox{\hyperlink{tetris__queue_8h_a4fcdd2fef75130807f777847209d0e16}{allocate\+Empty\+Queue}} ()
+\begin{DoxyCompactList}\small\item\em Allocates and initializes an empty queue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{tetris__queue_8h_a543e00018c033869c1d764353f24ab04}{free\+Queue}} (\mbox{\hyperlink{structQueue}{Queue}} $\ast$queue)
+\begin{DoxyCompactList}\small\item\em Frees the resources associated with a Tetris piece queue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions and structures for managing the Tetris piece queue. 
+
+This header file provides the definitions for managing a queue of Tetris pieces, including generating a bag of pieces, adding it to the queue, and retrieving pieces from the queue. The queue is used to determine the order in which Tetris pieces appear during gameplay. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{tetris__queue_8h_ab5fb032852508af8e6f3d8566d7b7276}\label{tetris__queue_8h_ab5fb032852508af8e6f3d8566d7b7276}} 
+\index{tetris\_queue.h@{tetris\_queue.h}!addBag@{addBag}}
+\index{addBag@{addBag}!tetris\_queue.h@{tetris\_queue.h}}
+\doxysubsubsection{\texorpdfstring{addBag()}{addBag()}}
+{\footnotesize\ttfamily void add\+Bag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structQueue}{Queue}} $\ast$}]{queue }\end{DoxyParamCaption})}
+
+
+
+Adds a randomized bag of Tetris pieces to the queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em queue} & Pointer to the \mbox{\hyperlink{structQueue}{Queue}} structure to which the bag will be added. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{tetris__queue_8h_a4fcdd2fef75130807f777847209d0e16}\label{tetris__queue_8h_a4fcdd2fef75130807f777847209d0e16}} 
+\index{tetris\_queue.h@{tetris\_queue.h}!allocateEmptyQueue@{allocateEmptyQueue}}
+\index{allocateEmptyQueue@{allocateEmptyQueue}!tetris\_queue.h@{tetris\_queue.h}}
+\doxysubsubsection{\texorpdfstring{allocateEmptyQueue()}{allocateEmptyQueue()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structQueue}{Queue}}$\ast$ allocate\+Empty\+Queue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Allocates and initializes an empty queue. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to the newly allocated, empty \mbox{\hyperlink{structQueue}{Queue}} structure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{tetris__queue_8h_a6703fdea715e9107d140bfb5cac84d1e}\label{tetris__queue_8h_a6703fdea715e9107d140bfb5cac84d1e}} 
+\index{tetris\_queue.h@{tetris\_queue.h}!allocateQueue@{allocateQueue}}
+\index{allocateQueue@{allocateQueue}!tetris\_queue.h@{tetris\_queue.h}}
+\doxysubsubsection{\texorpdfstring{allocateQueue()}{allocateQueue()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structQueue}{Queue}}$\ast$ allocate\+Queue (\begin{DoxyParamCaption}\item[{int}]{size,  }\item[{const \mbox{\hyperlink{TETRIS__ENUMS_8h_a12ed9719bbdf7bc596ff7a6f4bf3f021}{Piece\+Type}}}]{queue\+Data\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Allocates and initializes a queue with the specified Tetris pieces. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The number of pieces to include in the new queue. \\
+\hline
+{\em queue\+Data} & Array of Tetris piece types to initialize the queue. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the newly allocated \mbox{\hyperlink{structQueue}{Queue}} structure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{tetris__queue_8h_a543e00018c033869c1d764353f24ab04}\label{tetris__queue_8h_a543e00018c033869c1d764353f24ab04}} 
+\index{tetris\_queue.h@{tetris\_queue.h}!freeQueue@{freeQueue}}
+\index{freeQueue@{freeQueue}!tetris\_queue.h@{tetris\_queue.h}}
+\doxysubsubsection{\texorpdfstring{freeQueue()}{freeQueue()}}
+{\footnotesize\ttfamily void free\+Queue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structQueue}{Queue}} $\ast$}]{queue }\end{DoxyParamCaption})}
+
+
+
+Frees the resources associated with a Tetris piece queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em queue} & Pointer to the \mbox{\hyperlink{structQueue}{Queue}} structure to be freed. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{tetris__queue_8h_a73eae34a700934f27c9778d4c56d8fc0}\label{tetris__queue_8h_a73eae34a700934f27c9778d4c56d8fc0}} 
+\index{tetris\_queue.h@{tetris\_queue.h}!generateBag@{generateBag}}
+\index{generateBag@{generateBag}!tetris\_queue.h@{tetris\_queue.h}}
+\doxysubsubsection{\texorpdfstring{generateBag()}{generateBag()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{TETRIS__ENUMS_8h_a12ed9719bbdf7bc596ff7a6f4bf3f021}{Piece\+Type}}$\ast$ generate\+Bag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Generates a randomized bag of all seven Tetris piece types. 
+
+\begin{DoxyReturn}{Returns}
+A pointer to an array of randomized Tetris piece types. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{tetris__queue_8h_af9445dd73942342dbbaf5acdc62202d4}\label{tetris__queue_8h_af9445dd73942342dbbaf5acdc62202d4}} 
+\index{tetris\_queue.h@{tetris\_queue.h}!peekQueue@{peekQueue}}
+\index{peekQueue@{peekQueue}!tetris\_queue.h@{tetris\_queue.h}}
+\doxysubsubsection{\texorpdfstring{peekQueue()}{peekQueue()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{TETRIS__ENUMS_8h_a12ed9719bbdf7bc596ff7a6f4bf3f021}{Piece\+Type}}$\ast$ peek\+Queue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structQueue}{Queue}} $\ast$}]{queue,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+Peeks at the first few pieces in the queue without removing them. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em queue} & Pointer to the \mbox{\hyperlink{structQueue}{Queue}} structure to be peeked. \\
+\hline
+{\em size} & The number of pieces to peek at. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An array of Tetris piece types at the start of the queue. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{tetris__queue_8h_a32d3719090d9d6b3f3af1030b8a84c59}\label{tetris__queue_8h_a32d3719090d9d6b3f3af1030b8a84c59}} 
+\index{tetris\_queue.h@{tetris\_queue.h}!popQueue@{popQueue}}
+\index{popQueue@{popQueue}!tetris\_queue.h@{tetris\_queue.h}}
+\doxysubsubsection{\texorpdfstring{popQueue()}{popQueue()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{TETRIS__ENUMS_8h_a12ed9719bbdf7bc596ff7a6f4bf3f021}{Piece\+Type}} pop\+Queue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structQueue}{Queue}} $\ast$}]{queue }\end{DoxyParamCaption})}
+
+
+
+Removes and returns the first Tetris piece from the queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em queue} & Pointer to the \mbox{\hyperlink{structQueue}{Queue}} structure from which the piece will be popped. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Tetris piece type that was at the start of the queue. 
+\end{DoxyReturn}
