@@ -2,5 +2,5 @@ firmware.*
 CMakeCache.txt
 CMakeFiles/*
 
-documentation/html/*
-documentation/latex/*
+documentation/html*
+documentation/latex*
