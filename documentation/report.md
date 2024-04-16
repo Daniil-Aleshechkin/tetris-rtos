@@ -1,41 +1,47 @@
 # LED Matrices
 
-# Project Description
+## Project Description
 
-This project involved the creation of drivers for LED matrices, as well as exploring applications for these drivers. Two drivers were created, one for a 8x8 powered by neopixel LEDs (WS-2812), and another 32x32 one from sparkfun COM-14646. The two things I did were I apply these drivers as a GUI for my 452 Tetris project, and I created a video player which plays the music video 'Bad apple' (https://www.youtube.com/watch?v=FtutLA63Cp8)
+This project was aimed at developing drivers for LED matrices and exploring potential applications for these drivers. Two distinct drivers were developed: one for an 8x8 matrix powered by NeoPixel LEDs (WS-2812) and another for a 32x32 matrix from SparkFun (COM-14646). The applications developed include a graphical user interface (GUI) for a Tetris game (My project from 452) and a video player capable of playing the music video "Bad Apple."
 
-# Project Design
+## Project Design
 
-## WS-2812 driver
-This was based on the design from the STM32F103fastNP library (https://github.com/evilwombat/stm32f103_fastNP) which uses the technique from this block post  https://www.martinhubacek.cz/blog/stm32-ws2812b-dma-library/
+### WS-2812 Driver
+This driver is based on the STM32F103FastNP library (https://github.com/evilwombat/stm32f103_fastNP) which uses the technique from this block post  https://www.martinhubacek.cz/blog/stm32-ws2812b-dma-library/. The protocol for sending data is time-sensitive, requiring a single serial connection via one pin.
 
-The data just needs to be sent with one serial connection on one pin using a specific protocal which is time sensitive.
+In this protocol:
+- A 'zero' is represented by a short pulse.
+- A 'one' is represented by a long pulse.
+- A reset signal, indicated by a prolonged low signal, marks the end of the data transmission.
 
-Each bit is sent in series with a zero being represented as a short pulse:
+The implementation employs DMA and Timer 2:
+1. The first DMA channel triggers on Timer 2's start event, sending a byte with all bits set to '1' to the BSRR register to turn the pin high.
+2. The second channel sends a byte from our buffer to the BRR register, where a bit '1' resets the pin for a short pulse.
+3. The final channel sends a constant '1' to the BRR for the long pulse.
+4. The reset signal is executed by turning off the timer after data processing.
 
-And a one being represented with a long pulse:
+### COM-14646 Driver
+This driver controls the 32x32 LED matrix, differing significantly from the WS-2812-based 8x8 matrix. It involves manipulating only two of the 32 rows at a time via a shift register, with 13 total pins: 6 for data (RGB values for each row) and 7 for control.
 
-Then to indicate the data is finished a reset single must be sent which is a long series at 0:
+Operations are as follows:
+- Data is input, followed by a clock pulse, repeated 32 times.
+- A latch pulse is then sent to display the rows.
+- The output enable pin turns the rows on or off, which is crucial during row transitions.
 
-The method I used to send this protocal uses the DMA and timer 2. I use 3 DMA channels which listen to timer events. The first channel listens for the timer 2 begining event. That channel is programmed to send a byte with all 1s to the BSRR register, to set the pin on. The second channel sends a byte from our buffer to the BRR. A 1 in the bit means 0 because we will reset for the short 1 pulse, and do nothing for the long pulse. The final channel always sends a 1 to the BRR, for the long pulse. For the reset signal we just turn the timer off when we're done processing the data.
+The driver operates by sending RGB values and clock pulses for each pixel, waiting via a timer to ensure visibility, and then using the output enable pin to transition between row pairs. This process continues cyclically as only two rows are visible at any given time.
 
-## COM-14646 driver
-This driver was for the 32x32 LED matrix. It worked completely differently from the 8x8 which was based on ws-2812s. Instead of taking in one stream from one channel, and remembering it, you could only control 2 of the 32 rows using a shift register.
+### Tetris GUI Integration
+This integration was designed with the original project framework in mind. The existing print task, which runs concurrently with the input task, was modified to use the display driver instead of displaying a text representation of the Tetris board.
 
-The display had 13 total pins with 6 data pins, and 7 control pins. 4 of the 7 are to control which of the 32 rows the data pins would multiplex to. As there are 32 rows and you selected 2 at a time, there are 16 possible configurations. The other 3 are the latch pin, the clock pin, and the output enable pin.
+### Bad Apple Video Player
 
-The data pins are the RGB values for each row making 6 total pins. You input the data you wish to send then send a clock pulse, and repeat 32 times. When all the data is sent, you need to send a pusle to the latch pin to actually display the rows. The output enable pins simply turns the rows on and off. This is useful when transitioning rows, as they are not cleared when you change which rows you display.
+This application uses the 32x32 driver to display frames from the "Bad Apple" music video. Each frame is represented by 128 bytes, with each bit corresponding to a pixel in the black and white video. With a need for 1024 pixels per frame and a limitation on flash storage, only about 900-1000 frames can be stored at any time. 
 
-I simply used based GPIO control to make my driver. The driver first sent the RGB values for the 1st pixel of the top and bottom row I control, then it sent a clock pulse and repeated 32 times for each pixel. When it was done it sent a latch pulse. After the latch I had it wait for a timer to ensure the rows were on long enough for them to be actually visible. Then I turned off the rows using the output enable pin and transitioned to the next 2 rows. After all 16 were processed, the refresh would have been complete.
+The system operates with two main tasks:
+- An input task that reads frames from a USART serial input into a framebuffer.
+- A print task that displays the frames.
 
-Unlike the other driver this must be constantly called as only 2 out of the 32 rows would ever be on at a time. 
-
-## Tetris GUI integration
-This integration was very simple as I designed the orginal project with this extention in mind. There already was a print task that ran currently with the input task. To ensure the application displayed using the display driver, I simply replaced the code in the print task that sent a text representation of the board state with code that would buffer and refresh a new frame. 
-
-## Bad-Apple Video player
-
-The bad apple video player uses the 32x32 driver I wrote. Each frame of the video consisted of 128 bytes. Each bit represented a pixel as the video is in black and white, and I needed a total of 32x32=1024 pixels. I could not store all 6562 frames in flash, at maximum about 900-1000 frames could be stored as I compresed each frame to 128 bytes. Because of this I needed to send each frame and display it at runtime. It like my tetris app relies on two tasks, an input task and a print task. The input task reads froma USART serial input and writes to a framebuffer which the print task prints. The biggest engineering challenge was to send a frame via USART as bytes sent via USART are lost if they are not read. To ensure I send and recieve a frame without missing a byte, I sent a hardcoded byte and had the input task attempt to recieve it. This byte would indicate that a frame is ready to be sent by the client. The input task would then send another hardcoded byte to indicate to the client that a frame is ready to be recieved, then the client would send the frame. While the client is sending the frame, the input task echoes what's received, and the client ensures the amount of bytes echoed is equal to 128 before sending a new frame. When the loading is done the input task stores the received frame in a 7 frame buffer, and it listens to a timer which runs about 32 times a second before popping that buffer and switching to the next frame.
+A major engineering challenge was the real-time transmission and reception of frames over USART which has a risk of data loss. To manage this, a specific byte is sent to indicate readiness for frame transmission, which prompts the corresponding tasks on the sender and receiver sides to coordinate frame transfer effectively. The video runs at approximately 30 frames per second, facilitated by a timer-controlled buffer that runs at 32 Hz.
 
 # Project Testing
 
