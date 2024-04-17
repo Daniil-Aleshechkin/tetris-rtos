@@ -45,6 +45,18 @@ A major engineering challenge was the real-time transmission and reception of fr
 
 # Project Testing
 
+Testing was done using a voltameter to measure the maximum current draw of the 32x32, and the ADALM to measure the timing of a refresh.
+
+The full 32x32 would consume up to 2.5A.
+
+A full refresh of the display took 10ms.
+
+Then both the bad apple video player, and the tetris application were tested by using the application and ensuring it behaves as expected.
+
+The Tetris application still crashes occasionelly, but the crashes were consistent only to piece dropped. Before with the old terminal GUI crashes would happen intermittently. A memory leak is likely the cultprit of the issue. Additionelly as none of the tetris code was touched, there are still bugs with the piece placement. Sometimes the piece will spawn outside the bounds of the board, and sometimes the board will be cleared incorrectly spawning blocks at the top of the game board where they shouldn't be.
+
+The bad apple video player will occaisonelly lag and miss frames thus becoming desynced with the song, however it will still play the video to completion and function without needing a reset. 
+
 # Project Usage
 
 ## Project assembly
