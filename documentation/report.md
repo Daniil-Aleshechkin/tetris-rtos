@@ -63,20 +63,91 @@ The bad apple video player will occaisonelly lag and miss frames thus becoming d
 
 ### 8x8 Matrix
 
+The 8x8 can be powered directly using the board. The only data pin my library supports is PB0. 
+
 ### 32x32 Matrix
+
+The 32x32 cannot be powered by the board and needs to be powered using the 1A power cable provided. Simply screw on the attachment on the cable pin then place the ground and VCC inside the screwed attachment like the following:
+
+Once that is done the pinout needs to be assembled. The following 13 GPIO needs to be connected:
+
+//TODO: fill this in
+PB0 -> 
+PA0 -> 
+PA1
+PA2
+PA3
 
 ## Build and Flashing instructions
 
 ### Tetris-RTOS
 
+Source:
+
+First you must build the make files with cmake. Run the following cmake command:
+
+
+
 ### Bad-Apple video player
+
+Source: 
 
 ### WS-2812 driver
 
+Source:
+
+The driver is supplied in a keil uvision project and can be built and flashed via Keil. There is a sample demo animation that plays after it is flashed on the board.
+
 ### COM-14646 driver
+
+Source:
+
+The driver is supplied in a keil uvision project and can be built and flashed via Keil. There is a sample demo animation that plays after it is flashed on the board.
 
 ## Project Functions and Features
 
 ### Tetris-RTOS
+
+#### Controls
+
+The controls hardcoded to the following when directly connected to USART
+**Note:** Make sure num-lock is on. If it's off, I've noticed the keys do not get picked up.
+
+- D: Hard drop
+- S: Soft drop
+- W: 270 rotate
+- Q: 180 rotate
+- R: Reset Board
+- Tab: Hold piece
+- Numpad 4: Move left
+- Numpad 6: Move right
+- Numpad 8: Rotate 90
+- Numpad 5: Softdrop
+- P: Exit to CLI
+
+The controls when connected using the custom serial client are the following:
+
+- D: Hard drop
+- S: Soft drop
+- W: 270 rotate
+- Q: 180 rotate
+- R: Reset Board
+- Tab: Hold piece
+- Arrow Right: Move left
+- Arrow Left: Move right
+- Arrow Up: Rotate 90
+- Arrow Down: Softdrop
+- P: Exit to CLI
+
+#### CLI Commands
+
+The commands should be case insensitive
+
+Help: Displays a help screen with some information about what commands are available
+DAS N: Set the DAS delay value to whatever N is. This is amount of ticks, in the DAS task, because I couldn't get the timer to work due to the same linking issue with the interupts. So, there is unfortunatly no real world equivalent to it.
+ARR N: Set the ARR delay value to whatever N is. Same as DAS delay: No real world equivalent.
+dasenable: Enable the DAS feature
+dasdisable: disable the DAS feature
+quit: Return back to the game
 
 ### Bad-apple video player
