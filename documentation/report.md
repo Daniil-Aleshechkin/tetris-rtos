@@ -86,11 +86,25 @@ Source:
 
 First you must build the make files with cmake. Run the following cmake command:
 
+cmake -DPROJECT_NAME=firmware -DCMAKE_BUILD_TYPE=Debug -DDUMP_ASM=OFF
 
+Then run:
+
+make
+
+After the project is built it can be flashed with st-flash:
+
+st-flash --reset write ./firmware.bin 0x08000000
 
 ### Bad-Apple video player
 
 Source: 
+
+Like Tetris-RTOS this must be built with cmake then flashed with st-flash
+
+cmake -DPROJECT_NAME=firmware -DCMAKE_BUILD_TYPE=Debug -DDUMP_ASM=OFF
+make
+st-flash --reset write ./firmware.bin 0x08000000
 
 ### WS-2812 driver
 
@@ -107,6 +121,20 @@ The driver is supplied in a keil uvision project and can be built and flashed vi
 ## Project Functions and Features
 
 ### Tetris-RTOS
+
+The application can be run in two ways, either using a custom serial client (This is required for the auto repeat feature), or just with a direct serial connection.
+
+Connecting directly can be done with pyserial on linux:
+
+python -m serial.tools.miniterm **SERIAL PORT HERE** 1500000 -f direct
+
+The terminal client must be run after switching to the virtual environment. 
+
+source ./tetris-rtos/bin/activate
+
+Then it can simply be run with
+
+python ./terminal/terminal.py **SERIAL PORT HERE**
 
 #### Controls
 
