@@ -201,7 +201,9 @@ Dasdisable: Disable Delayed Auto Repeat \n\
 Help: Prints command list \n\
 Quit: Return to the game \n\
 DAS N: Set the das delay time to N (default is 40000) \n\
-ARR N: Set the arr delay time to N. Zero to disable (default is 0)";
+ARR N: Set the arr delay time to N. Zero to disable (default is 0)\n\
+Version: Displays the parent commit, and the date of the commit. ";
+
 const char* VERSION_OUTPUT_STRING = VERSION_MESSAGE;
 
 const char* UNKNOWN_OUTPUT_STRING = "Unknown command";

@@ -20,6 +20,8 @@ The implementation employs DMA and Timer 2:
 3. The final channel sends a constant '1' to the BRR for the long pulse.
 4. The reset signal is executed by turning off the timer after data processing.
 
+The use of the DMA channels, and timer allowed the stm-32 to send protocal data quickly and reliably as it is decoupled from interupts from the CPU.
+
 ### COM-14646 Driver
 This driver controls the 32x32 LED matrix, differing significantly from the WS-2812-based 8x8 matrix. It involves manipulating only two of the 32 rows at a time via a shift register, with 13 total pins: 6 for data (RGB values for each row) and 7 for control.
 
@@ -28,7 +30,7 @@ Operations are as follows:
 - A latch pulse is then sent to display the rows.
 - The output enable pin turns the rows on or off, which is crucial during row transitions.
 
-The driver operates by sending RGB values and clock pulses for each pixel, waiting via a timer to ensure visibility, and then using the output enable pin to transition between row pairs. This process continues cyclically as only two rows are visible at any given time.
+The driver operates by sending RGB values and clock pulses for each pixel, waiting via a timer to ensure visibility, and then using the output enable pin to transition between row pairs. This process continues cyclically as only two rows are visible at any given time. Given this limitation, the rows must be 
 
 ### Tetris GUI Integration
 This integration was designed with the original project framework in mind. The existing print task, which runs concurrently with the input task, was modified to use the display driver instead of displaying a text representation of the Tetris board.
@@ -50,6 +52,8 @@ Testing was done using a voltameter to measure the maximum current draw of the 3
 The full 32x32 would consume up to 2.5A.
 
 A full refresh of the display took 10ms.
+
+A full frame takes up only 3 kB of RAM, and I had a 7 frame buffer on the video player which takes up an additional 896 byte.
 
 Then both the bad apple video player, and the tetris application were tested by using the application and ensuring it behaves as expected.
 
@@ -82,7 +86,7 @@ PA3
 
 ### Tetris-RTOS
 
-Source:
+Source: https://github.com/Daniil-Aleshechkin/tetris-rtos
 
 First you must build the make files with cmake. Run the following cmake command:
 
@@ -98,7 +102,7 @@ st-flash --reset write ./firmware.bin 0x08000000
 
 ### Bad-Apple video player
 
-Source: 
+Source: https://github.com/Daniil-Aleshechkin/bad-apple
 
 Like Tetris-RTOS this must be built with cmake then flashed with st-flash
 
@@ -108,13 +112,13 @@ st-flash --reset write ./firmware.bin 0x08000000
 
 ### WS-2812 driver
 
-Source:
+Source: https://github.com/Daniil-Aleshechkin/cmsis-ws2821-controller
 
 The driver is supplied in a keil uvision project and can be built and flashed via Keil. There is a sample demo animation that plays after it is flashed on the board.
 
 ### COM-14646 driver
 
-Source:
+Source: https://github.com/Daniil-Aleshechkin/com-14646
 
 The driver is supplied in a keil uvision project and can be built and flashed via Keil. There is a sample demo animation that plays after it is flashed on the board.
 
@@ -177,5 +181,26 @@ ARR N: Set the ARR delay value to whatever N is. Same as DAS delay: No real worl
 dasenable: Enable the DAS feature
 dasdisable: disable the DAS feature
 quit: Return back to the game
+version: Displays the parent commit, and the date of the commit. 
 
 ### Bad-apple video player
+
+The video player is run using another python script supplying the serial port file in the arguments just like the serial client for the tetris-rtos project.
+
+First activate the virtual environment:
+
+source ./bad-apple/bin/activate
+
+python ./terminal/terminal.py **SERIAL PORT HERE**
+
+This will cause the song to play and the video to be displayed.
+
+# Project changes
+
+The project during development underwent multiple changes from the original requirements. Originally the plan was to integrate a PS2 keyboard using a similar method with the DMA. 
+
+There would have been an interupt on the PS/2 clock pin which would trigger a DMA transfer. This would transfer all the bits of the PS2 into an input buffer. Then the input task would poll the DMA, and if there was a full transfer, it would then take the bytes from the buffer and reconstruct the scan code. Then it would decode the scan code and execute the mapped actions. 
+
+This integration would make inputs more reliable to injest as USART bytes would often get eaten if the player played too fast. Unfortunatly, I was unable to get the keyboard to send data when it was powered. Only the 3 indicator LEDs would turn on then blink.
+
+Instead, I created the bad-apple video player which was another project that I wanted to do with my display driver.
