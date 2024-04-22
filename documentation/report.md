@@ -73,14 +73,28 @@ The 8x8 can be powered directly using the board. The only data pin my library su
 
 The 32x32 cannot be powered by the board and needs to be powered using the 1A power cable provided. Simply screw on the attachment on the cable pin then place the ground and VCC inside the screwed attachment like the following:
 
-Once that is done the pinout needs to be assembled. The following 13 GPIO needs to be connected:
+![Power_Cable](../images/power_cable.jpg)
 
-//TODO: fill this in
-PB0 -> 
-PA0 -> 
-PA1
-PA2
-PA3
+Once that is done the pinout needs to be assembled. 
+
+There's no datasheet unfortunatly, but there's a guide that can be found here with a pinout diagram: https://learn.adafruit.com/32x16-32x32-rgb-led-matrix/new-wiring. (See the layout for 32x32, Variant A)
+
+The following 13 GPIO needs to be connected:
+
+PB0 -> R1
+PB1 -> G1
+PB2 -> B1
+PB6 -> R2
+PB9 -> B2
+PB8 -> G2
+PC5 -> A
+PC2 -> B
+PC3 -> C
+PC6 -> D
+PA9 -> OE
+PA1 -> LAT
+PA0 -> CLK
+GND -> (all 4 ground pins)
 
 ## Build and Flashing instructions
 
