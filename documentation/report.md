@@ -14,6 +14,8 @@ In this protocol:
 - A 'one' is represented by a long pulse.
 - A reset signal, indicated by a prolonged low signal, marks the end of the data transmission.
 
+![Diagram](../images/diagram.png)
+
 The implementation employs DMA and Timer 2:
 1. The first DMA channel triggers on Timer 2's start event, sending a byte with all bits set to '1' to the BSRR register to turn the pin high.
 2. The second channel sends a byte from our buffer to the BRR register, where a bit '1' resets the pin for a short pulse.
