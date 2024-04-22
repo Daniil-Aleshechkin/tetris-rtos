@@ -84,18 +84,31 @@ There's no datasheet unfortunatly, but there's a guide that can be found here wi
 The following 13 GPIO needs to be connected:
 
 PB0 -> R1
+
 PB1 -> G1
+
 PB2 -> B1
+
 PB6 -> R2
+
 PB9 -> B2
+
 PB8 -> G2
+
 PC5 -> A
+
 PC2 -> B
+
 PC3 -> C
+
 PC6 -> D
+
 PA9 -> OE
+
 PA1 -> LAT
+
 PA0 -> CLK
+
 GND -> (all 4 ground pins)
 
 ## Build and Flashing instructions
