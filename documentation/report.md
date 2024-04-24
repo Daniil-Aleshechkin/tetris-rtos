@@ -193,13 +193,13 @@ The controls when connected using the custom serial client are the following:
 
 The commands should be case insensitive
 
-Help: Displays a help screen with some information about what commands are available
-DAS N: Set the DAS delay value to whatever N is. This is amount of ticks, in the DAS task, because I couldn't get the timer to work due to the same linking issue with the interupts. So, there is unfortunatly no real world equivalent to it.
-ARR N: Set the ARR delay value to whatever N is. Same as DAS delay: No real world equivalent.
-dasenable: Enable the DAS feature
-dasdisable: disable the DAS feature
-quit: Return back to the game
-version: Displays the parent commit, and the date of the commit. 
+- Help: Displays a help screen with some information about what commands are available
+- DAS N: Set the DAS delay value to whatever N is. This is amount of ticks, in the DAS task, because I couldn't get the timer to work due to the same linking issue with the interupts. So, there is unfortunatly no real world equivalent to it.
+- ARR N: Set the ARR delay value to whatever N is. Same as DAS delay: No real world equivalent.
+- dasenable: Enable the DAS feature
+- dasdisable: disable the DAS feature
+- quit: Return back to the game
+- version: Displays the parent commit, and the date of the commit. 
 
 ### Bad-apple video player
 
